@@ -12,10 +12,11 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    Link,
+
   } from '@chakra-ui/react';
   import { useState } from 'react';
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+  import {Link} from 'wouter'
   
   export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
@@ -85,9 +86,15 @@ import {
                 </Button>
               </Stack>
               <Stack pt={6}>
-                <Text align={'center'}>
-                  Already a user? <Link color={'blue.400'}>Login</Link>
-                </Text>
+              <Button
+            as={Link}
+            fontSize={"md"}
+            fontWeight={400}
+            variant={"link"}
+            to='/login'
+          >
+             Already a member? Login now
+          </Button>
               </Stack>
             </Stack>
           </Box>

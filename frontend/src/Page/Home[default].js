@@ -2,10 +2,11 @@ import React from 'react'
 import {Container 
 ,
 Heading,
-Link,
 Button
 
 } from '@chakra-ui/react'
+
+import {Link} from 'wouter'
 
 function Home() {
     return (
@@ -25,7 +26,7 @@ function Home() {
             If you have ideas to improve this application, Please let me know!
            </Heading>
 
-           <Button size='lg' colorScheme='green' mt='24px'>
+           <Button size='lg' as={Link} to='/register' colorScheme='green' mt='24px'>
     Create a free account
   </Button>
 

@@ -6,12 +6,14 @@ import {
     Input,
     Checkbox,
     Stack,
-    Link,
+
     Button,
     Heading,
     Text,
     useColorModeValue,
+  
   } from '@chakra-ui/react';
+  import {Link } from 'wouter'
   
   export default function Login() {
     return (
@@ -52,9 +54,15 @@ import {
               </Stack>
 
               <Stack pt={6}>
-                <Text align={'center'}>
-                  Don't have a account? <Link color={'blue.400'}>Register</Link>
-                </Text>
+              <Button
+            as={Link}
+            fontSize={"md"}
+            fontWeight={400}
+            variant={"link"}
+            to='/register'
+          >
+            Don't have an account? Create one now!
+          </Button>
               </Stack>
             </Stack>
           </Box>
