@@ -20,7 +20,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import {Link} from 'wouter'
+import { Link } from "wouter";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -38,26 +38,22 @@ export default function WithSubnavigation() {
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
       >
-        
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-         
-         <Link to='/'>
-         
-         <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-            
-            style={{fontSize:"2rem"}}
-            
-          >
-           <strong>BearTodos</strong>
-          </Text>
-         
-         </Link>
-
-         
-        </Flex>
+       
+          <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+            <Text
+              textAlign={useBreakpointValue({ base: "center", md: "left" })}
+              fontFamily={"heading"}
+              color={useColorModeValue("green.500", "white")}
+              style={{ fontSize: "2rem" }}
+            > 
+            <Link href="/">
+              <a>
+              <strong>BearTodos</strong>
+              </a>
+                </Link>
+            </Text>
+          </Flex>
+      
 
         <Stack
           flex={{ base: 1, md: 0 }}
@@ -89,8 +85,6 @@ export default function WithSubnavigation() {
           </Button>
         </Stack>
       </Flex>
-
-     
     </Box>
   );
 }
