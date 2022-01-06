@@ -62,21 +62,22 @@ export default function WithSubnavigation() {
           spacing={6}
         >
           <Button
-            as={"a"}
+            as={Link}
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-            href={"#"}
+            to='/login'
           >
             Sign In
           </Button>
           <Button
+             as={Link}
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}
             bg={"green.400"}
-            href={"#"}
+            to='/register'
             _hover={{
               bg: "green.300",
             }}

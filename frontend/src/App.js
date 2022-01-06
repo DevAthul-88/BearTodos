@@ -3,6 +3,7 @@ import Provider from "./Provider/Token";
 import Home from "./Page/Home";
 import TodoHome from "./Page/Todo/Home";
 import { ChakraProvider } from "@chakra-ui/react";
+import Footer from './Components/Footer'
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -10,6 +11,7 @@ function App() {
   return (
     <ChakraProvider>
       <div className="App">{auth ? <TodoHome /> : <Home />}</div>
+      <Footer />
     </ChakraProvider>
   );
 }
