@@ -1,12 +1,18 @@
-function Token(){
+import axios from 'axios';
+
+async function Token(){
 
     const token = localStorage.getItem('todo_token')
 
     if(token == null) return null
 
-    return token
+    let res = await axios.post('/user/verify' ,{token} , {headers:{Authorization:token}})
+
+    console.log(res);
+
+    return true
 
 
 }
 
-module.exports = Token;
+export default Token

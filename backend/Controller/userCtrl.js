@@ -6,12 +6,12 @@ const jwt = require("jsonwebtoken")
 module.exports = {
   login: async (req , res) => {
       try {
-
+         console.log(req.body);
           const {email , password } = req.body
 
           const user = await User.findOne({email: email})
 
-          if(!user) return res.status(404).send({message: "User not found"})
+          if(!user) return res.status(400).send({message: "User not found"})
 
           const validPassword = await bcrypt.compare(password , user.password)
 

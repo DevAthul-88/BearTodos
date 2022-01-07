@@ -1,72 +1,166 @@
-import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
-    Stack,
+import React, { useState, useEffect } from "react";
+import axios from 'axios'
 
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
+
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Checkbox,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  AlertIcon,
+  CloseButton
+} from "@chakra-ui/react";
+import { Link } from "wouter";
+
+export default function Login() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error , setError] = useState(null)
+
+ 
+
+  function handleChange(e){
+    const {name , value} = e.target
+
+    setUser((prev) => {
+      return{
+        ...prev,
+        [name]:value
+      }
+    })
+  }
+
+  async function handleSubmit(e){
+    e.preventDefault()
+
+
+    try {
+
+      const data = {
+        email:user.email,
+        password:user.password
+      }
+      
+      const res = await axios.post('/user/login' , data)
+      console.log(res.data);
+      
+      if(res.data.token) return localStorage.setItem('todo_token' , res.data.token)
   
-  } from '@chakra-ui/react';
-  import {Link } from 'wouter'
-  
-  export default function Login() {
-    return (
+      setError(res.data.message)
+      
+    } catch (error) {
+
+      setError(error.response.data.message)
+      
+    }
+
+
+  }
+
+  return (
+    <div>
+      
+     {
+       error && (
+        <Stack>
+        <Alert status='error'>
+      <AlertIcon />
+      <AlertTitle mr={2}>Alert</AlertTitle>
+      <AlertDescription>{error}</AlertDescription>
+      <CloseButton position='absolute' right='8px' top='8px' onClick={() => setError(null)} />
+    </Alert>
+        </Stack>
+       )
+     }
+ 
       <Flex
-        minH={'auto'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-          <Stack align={'center'}>
-            <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-            
+        minH={"auto"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
+
+
+
+
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+
+    
+   
+
+
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"}>Sign in to your account</Heading>
           </Stack>
+
+     
+
+
+
           <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}>
-            <Stack spacing={4}>
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+
+        <form onSubmit={handleSubmit}>
+
+        <Stack spacing={4}>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input  type="email" name="email" value={user.email} onChange={handleChange} required/>
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" />
+                <Input type="password" name="password" value={user.password} onChange={handleChange} required/>
               </FormControl>
+
               <Stack spacing={10}>
-               
                 <Button
-                  bg={'green.400'}
-                  color={'white'}
+                type="submit"
+                  bg={"green.400"}
+                  color={"white"}
                   _hover={{
-                    bg: 'green.600',
-                  }}>
+                    bg: "green.600",
+                  }}
+                >
                   Sign in
                 </Button>
               </Stack>
 
               <Stack pt={6}>
-              <Button
-            as={Link}
-            fontSize={"md"}
-            fontWeight={400}
-            variant={"link"}
-            to='/register'
-          >
-            Don't have an account? Create one now!
-          </Button>
+                <Button
+                  as={Link}
+                  fontSize={"md"}
+                  fontWeight={400}
+                  variant={"link"}
+                  to="/register"
+                >
+                  Don't have an account? Create one now!
+                </Button>
               </Stack>
             </Stack>
+
+        </form>
+        
           </Box>
         </Stack>
       </Flex>
-    );
-  }
+    </div>
+    
+  );
+}

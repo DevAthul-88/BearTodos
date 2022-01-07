@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Provider from "./Provider/Token";
 import Home from "./Page/Home";
 import TodoHome from "./Page/Todo/Home";
@@ -7,6 +7,10 @@ import Footer from './Components/Footer'
 
 function App() {
   const [auth, setAuth] = useState(false);
+
+ useEffect(() => {
+   Provider()
+ },[])
 
   return (
     <ChakraProvider>
