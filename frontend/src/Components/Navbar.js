@@ -35,6 +35,7 @@ import {
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
+import {Link as RouteLink} from 'wouter'
 
 let user = ''
 
@@ -42,13 +43,14 @@ let user = ''
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  path:string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Todos', icon: FiTrendingUp },
-  { name: 'History', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome , path:"/" },
+  { name: 'Todos', icon: FiTrendingUp , path:"/todos"},
+  { name: 'History', icon: FiCompass, path:"/history" },
+  { name: 'Favourites', icon: FiStar , path:"/favorites"},
+  { name: 'Settings', icon: FiSettings , path:"/settings"},
 ];
 
 
@@ -66,7 +68,7 @@ export default function SidebarWithHeader( {children,}: {
   
 
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
@@ -114,8 +116,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem as={RouteLink} href={link.path} id="RouterNavLink"  key={link.name}  icon={link.icon} >
+
+        
           {link.name}
+      
+
         </NavItem>
       ))}
     </Box>
@@ -128,7 +134,7 @@ interface NavItemProps extends FlexProps {
 }
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link as={'span'} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         align="center"
         p="4"
