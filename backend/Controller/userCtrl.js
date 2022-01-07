@@ -63,7 +63,26 @@ module.exports = {
 
   verifyUser: (req , res) => {
 
-    
+    try {
+
+        const token = req.headers('Authorization')
+
+        if(!token) return res.status(400).send({valid: false});
+
+        const verifyToken = jwt.verify(token , process.env.Token , (err , data) => {
+            if(err) return res.status(500).send({valid: false});
+
+            const user = User.findById(data._id)
+
+            if(!user) return res.status(400).send({valid: false});
+
+            res.send({valid: true , user: user});
+        })
+
+        
+    } catch (error) {
+        res.status(500).send({message: error.message});
+    }
 
   },
 
