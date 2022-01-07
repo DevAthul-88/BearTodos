@@ -7,11 +7,13 @@ import {Route} from 'wouter'
 
 function Home({isAuth, setUser , }) {
  
+
     return (
 
         <div>
-            <Navbar />
-         
+<Navbar />
+       
+      
             <Route path='/' component={DefaultHome} />
             <Route path='/login' >
                 <Login isAuth={isAuth} setUserLocal={setUser} />
