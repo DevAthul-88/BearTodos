@@ -30,7 +30,7 @@ module.exports = {
           })
 
           payload.token = token
-          res.send({token: token})
+          res.send({token: token, status:true})
 
           
       } catch (error) {
@@ -80,7 +80,14 @@ module.exports = {
 
             if(!user) return res.status(400).send({valid: false});
 
-            res.send({valid: true , user: user});
+            const setUser = {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                id: user._id,
+                email: user.email
+            }
+
+            res.send({valid: true , user: setUser});
         })
 
         

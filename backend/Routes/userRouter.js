@@ -8,6 +8,6 @@ router
   .delete(userCtrl.deleteUser);
 
   router.route('/login').post(userCtrl.login)
-  router.route('/verify').post(userCtrl.verifyUser)
+  router.route('/verify').get(userCtrl.verifyUser)
 
 module.exports = router;

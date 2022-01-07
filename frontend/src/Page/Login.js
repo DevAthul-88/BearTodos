@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
-
+import axios from "axios";
 
 import {
   Flex,
@@ -18,97 +17,77 @@ import {
   AlertDescription,
   AlertTitle,
   AlertIcon,
-  CloseButton
+  CloseButton,
 } from "@chakra-ui/react";
 import { Link } from "wouter";
 
-export default function Login() {
+export default function Login({ isAuth }) {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const [error , setError] = useState(null)
+  const [error, setError] = useState(null);
 
- 
-
-  function handleChange(e){
-    const {name , value} = e.target
+  function handleChange(e) {
+    const { name, value } = e.target;
 
     setUser((prev) => {
-      return{
+      return {
         ...prev,
-        [name]:value
-      }
-    })
+        [name]: value,
+      };
+    });
   }
 
-  async function handleSubmit(e){
-    e.preventDefault()
-
+  async function handleSubmit(e) {
+    e.preventDefault();
 
     try {
-
       const data = {
-        email:user.email,
-        password:user.password
-      }
-      
-      const res = await axios.post('/user/login' , data)
-      console.log(res.data);
-      
-      if(res.data.token) return localStorage.setItem('todo_token' , res.data.token)
-  
-      setError(res.data.message)
-      
+        email: user.email,
+        password: user.password,
+      };
+
+      const res = await axios.post("/user/login", data);
+
+      localStorage.setItem("todo_token", res.data.token);
+
+      setError(res.data.message);
+      isAuth(true);
     } catch (error) {
-
-      setError(error.response.data.message)
-      
+      setError(error.message);
     }
-
-
   }
 
   return (
     <div>
-      
-     {
-       error && (
+      {error && (
         <Stack>
-        <Alert status='error'>
-      <AlertIcon />
-      <AlertTitle mr={2}>Alert</AlertTitle>
-      <AlertDescription>{error}</AlertDescription>
-      <CloseButton position='absolute' right='8px' top='8px' onClick={() => setError(null)} />
-    </Alert>
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle mr={2}>Alert</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+            <CloseButton
+              position="absolute"
+              right="8px"
+              top="8px"
+              onClick={() => setError(null)}
+            />
+          </Alert>
         </Stack>
-       )
-     }
- 
+      )}
+
       <Flex
         minH={"auto"}
         align={"center"}
         justify={"center"}
         bg={useColorModeValue("gray.50", "gray.800")}
       >
-
-
-
-
         <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-
-    
-   
-
-
           <Stack align={"center"}>
             <Heading fontSize={"4xl"}>Sign in to your account</Heading>
           </Stack>
-
-     
-
-
 
           <Box
             rounded={"lg"}
@@ -116,51 +95,58 @@ export default function Login() {
             boxShadow={"lg"}
             p={8}
           >
+            <form onSubmit={handleSubmit}>
+              <Stack spacing={4}>
+                <FormControl id="email">
+                  <FormLabel>Email address</FormLabel>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </FormControl>
+                <FormControl id="password">
+                  <FormLabel>Password</FormLabel>
+                  <Input
+                    type="password"
+                    name="password"
+                    value={user.password}
+                    onChange={handleChange}
+                    required
+                  />
+                </FormControl>
 
-        <form onSubmit={handleSubmit}>
+                <Stack spacing={10}>
+                  <Button
+                    type="submit"
+                    bg={"green.400"}
+                    color={"white"}
+                    _hover={{
+                      bg: "green.600",
+                    }}
+                  >
+                    Sign in
+                  </Button>
+                </Stack>
 
-        <Stack spacing={4}>
-              <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
-                <Input  type="email" name="email" value={user.email} onChange={handleChange} required/>
-              </FormControl>
-              <FormControl id="password">
-                <FormLabel>Password</FormLabel>
-                <Input type="password" name="password" value={user.password} onChange={handleChange} required/>
-              </FormControl>
-
-              <Stack spacing={10}>
-                <Button
-                type="submit"
-                  bg={"green.400"}
-                  color={"white"}
-                  _hover={{
-                    bg: "green.600",
-                  }}
-                >
-                  Sign in
-                </Button>
+                <Stack pt={6}>
+                  <Button
+                    as={Link}
+                    fontSize={"md"}
+                    fontWeight={400}
+                    variant={"link"}
+                    to="/register"
+                  >
+                    Don't have an account? Create one now!
+                  </Button>
+                </Stack>
               </Stack>
-
-              <Stack pt={6}>
-                <Button
-                  as={Link}
-                  fontSize={"md"}
-                  fontWeight={400}
-                  variant={"link"}
-                  to="/register"
-                >
-                  Don't have an account? Create one now!
-                </Button>
-              </Stack>
-            </Stack>
-
-        </form>
-        
+            </form>
           </Box>
         </Stack>
       </Flex>
     </div>
-    
   );
 }
