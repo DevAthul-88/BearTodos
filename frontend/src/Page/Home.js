@@ -5,16 +5,16 @@ import Register from '../Page/Register'
 import DefaultHome from '../Page/Home[default]'
 import {Route} from 'wouter'
 
-function Home({isAuth},user) {
-    console.log(user);
+function Home({isAuth, setUser , }) {
+ 
     return (
 
         <div>
             <Navbar />
-            <h1>{user.firstName}</h1>
+         
             <Route path='/' component={DefaultHome} />
             <Route path='/login' >
-                <Login isAuth={isAuth}/>
+                <Login isAuth={isAuth} setUserLocal={setUser} />
             </Route>
             <Route path='/register' component={Register}/>
             

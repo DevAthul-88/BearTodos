@@ -29,8 +29,18 @@ module.exports = {
               expiresIn:"30d"
           })
 
+          
+
           payload.token = token
-          res.send({token: token, status:true})
+
+          const setUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            id: user._id,
+            email: user.email
+        }
+
+          res.send({token: token, status:true, user:setUser})
 
           
       } catch (error) {
