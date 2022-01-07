@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 module.exports = {
-  getUser: async (req , res) => {
+  login: async (req , res) => {
       try {
 
           const {email , password } = req.body
@@ -13,17 +13,19 @@ module.exports = {
 
           if(!user) return res.status(404).send({message: "User not found"})
 
-          const validPassword = await bcrypt.compare(user.password , password)
+          const validPassword = await bcrypt.compare(password , user.password)
 
           if(!validPassword) return res.status(400).send({message: "Invalid password"})
 
           const payload = {
-           
+              email: user.email,
               id:user._id,
 
           }
 
-          const token = jwt.sign(payload , process.env.Token , {
+          
+
+          const token = jwt.sign(payload , process.env.TOKEN , {
               expiresIn:"30d"
           })
 
@@ -65,14 +67,16 @@ module.exports = {
 
     try {
 
-        const token = req.headers('Authorization')
+        const token = req.header('Authorization')
 
         if(!token) return res.status(400).send({valid: false});
 
-        const verifyToken = jwt.verify(token , process.env.Token , (err , data) => {
+        const verifyToken = jwt.verify(token , process.env.TOKEN , async (err , data) => {
             if(err) return res.status(500).send({valid: false});
 
-            const user = User.findById(data._id)
+            
+
+            const user = await User.findById(data.id)
 
             if(!user) return res.status(400).send({valid: false});
 
