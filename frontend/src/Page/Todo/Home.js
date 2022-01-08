@@ -25,7 +25,7 @@ function Home() {
 
         
       
-     <Container>
+     <Container maxW='container.md'>
      <Route path="/" component={Explore} />
      <Route path="/todos" component={Todos} />
      <Route path="/history" component={History} />
