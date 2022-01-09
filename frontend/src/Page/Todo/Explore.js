@@ -21,12 +21,12 @@ function Explore() {
         </Box>
       </Flex>
 
-      <Flex marginTop={'10'} justifyContent={'space-between'} flexWrap={'wrap'}>
+      <Flex marginTop={'10'} justifyContent={'space-between'} className="flex-explore">
 
-        <Box width='100%' background={'green.100'} shadow={'lg'} padding={'10'}  textAlign={'center'}>
+        <Box width='100%' background={'green.100'} shadow={'lg'} marginTop={'1.5'} padding={'10'}  textAlign={'center'} >
           <Icon as={FaCheck} w={6} h={6} color={'green.500'}/>
           <Text fontWeight={'bold'} fontSize={{ base: '24px', md: '40px', lg: '3xl' }} marginTop={'1.5'} color='green.500'>
-              100 Completed
+              100 Done
           </Text>
         </Box>
 

@@ -7,7 +7,10 @@ import Footer from "./Components/Footer";
 
 function App() {
   const [auth, setAuth] = useState(false);
-  const [user , setUser] = useState("");
+  const [user, setUser] = useState("");
+  
+
+  
 
   useEffect(() => {
     async function checkAuth() {
@@ -18,18 +21,15 @@ function App() {
           headers: { Authorization: token },
         });
 
-        console.log(res.data.valid);
         setAuth(res.data.valid);
-        if (res.data.valid === false) return localStorage.clear()
+        if (res.data.valid === false) return localStorage.clear();
 
-        
-        let user = JSON.parse(localStorage.getItem('todo_user'))
+        let user = JSON.parse(localStorage.getItem("todo_user"));
 
-       if(user !== null && user !== undefined){
-        setUser(user)
-        
-       }
-
+        if (user !== null && user !== undefined) {
+          setUser(user);
+          
+        }
       } else {
         setAuth(false);
       }
@@ -38,10 +38,11 @@ function App() {
   }, []);
 
   
+
   return (
     <ChakraProvider>
       <div className="App">
-        {auth ? <TodoHome /> : <Home isAuth={setAuth}  setUser={setUser} />}
+        {auth ? <TodoHome /> : <Home isAuth={setAuth} setUser={setUser} />}
       </div>
       <Footer />
     </ChakraProvider>

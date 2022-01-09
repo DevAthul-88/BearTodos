@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
-.active{
-  background: red !important;
+@media  screen and  (max-width:991px){
+
+  .flex-explore{
+    flex-wrap: wrap !important;
+  }
 }

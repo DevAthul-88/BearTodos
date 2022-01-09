@@ -21,7 +21,12 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "wouter";
 
-export default function Login({ isAuth, setUserLocal}) {
+
+
+export default function Login({ isAuth, setUserLocal }) {
+
+
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -42,7 +47,7 @@ export default function Login({ isAuth, setUserLocal}) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    
     try {
       const data = {
         email: user.email,
@@ -50,17 +55,19 @@ export default function Login({ isAuth, setUserLocal}) {
       };
 
       const res = await axios.post("/user/login", data);
+      
 
       localStorage.setItem("todo_token", res.data.token);
-      localStorage.setItem("user" , JSON.stringify(res.data.user))
-      setUserLocal(res.data.user)
-      isAuth(true)
-      setError(res.data.message);
+      localStorage.setItem("todo_user", JSON.stringify(res.data.user));
+      setUserLocal(res.data.user);
+      isAuth(true);
       
+      setError(res.data.message);
     } catch (error) {
       setError(error.message);
     }
   }
+
 
   return (
     <div>

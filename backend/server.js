@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoute = require('./Routes/userRouter')
+const todoRoute = require('./Routes/todoRouter')
 
 const app = express();
 
@@ -15,6 +16,7 @@ mongoose.connect(process.env.MONGO_URL , (err) => {
 })
 
 app.use('/user' , userRoute)
+app.use('/todo' , todoRoute)
 
 
 

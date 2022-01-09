@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Users } from "../Page/Todo/Home";
 import {
   IconButton,
@@ -37,7 +37,11 @@ import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { Link as RouteLink, useRoute } from "wouter";
 
-let user = "";
+let user = '';
+
+
+
+
 
 interface LinkItemProps {
   name: string;
@@ -61,10 +65,12 @@ export default function SidebarWithHeader(
   }
 ) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  user = useContext(Users);
+  
+  useEffect(() => {
+    user = JSON.parse(localStorage.getItem('todo_user'))
+  },[])
 
- 
-
+  
   return (
     <Box>
       <SidebarContent
@@ -182,6 +188,20 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+
+ async function handleSignOut(){
+    
+    let token = localStorage.getItem('todo_token')
+
+    if(token){
+         await localStorage.clear()
+         window.location.href = '/login'
+    }
+    else{
+      return null
+    }
+  }
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -246,7 +266,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Profile</MenuItem>
               <MenuItem>Settings</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
