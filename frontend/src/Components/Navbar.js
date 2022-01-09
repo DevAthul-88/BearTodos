@@ -1,5 +1,4 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import { Users } from "../Page/Todo/Home";
 import {
   IconButton,
   Avatar,
@@ -75,9 +74,11 @@ export default function SidebarWithHeader(
     <Box>
       <SidebarContent
         onClose={() => onClose}
+        
         display={{ base: "none", md: "block" }}
       />
       <Drawer
+        
         autoFocus={false}
         isOpen={isOpen}
         placement="left"
