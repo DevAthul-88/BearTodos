@@ -24,6 +24,11 @@ const todoSchema = new mongoose.Schema({
         required:true,
     },
 
+    completed:{
+        type: Boolean,
+        required:false,
+    },
+
     created:{
         type: Date,
         default: Date.now,

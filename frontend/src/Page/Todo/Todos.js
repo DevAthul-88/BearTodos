@@ -10,28 +10,34 @@ import {
 import { Link as WLnk } from "wouter";
 import Axios from "axios";
 import Todo_Card from '../Todo/Todo_card'
-import Todo_card from "../Todo/Todo_card";
+
 
 function Todos() {
   const [todo, setTodo] = useState([]);
   const [cat, setCat] = useState([]);
   const [catLoading, setCatLoading] = useState(true);
+  const [todoLoading, setTodoLoading] = useState(false)
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("todo_user"));
 
     Axios.post("/todo/getCat", { id: user.id }).then((e) => {
       setCat(e.data.cat);
-      console.log(e.data.cat);
       setCatLoading(false);
     });
+
+    Axios.post("/todo/get" , { id: user.id }).then((e) => {
+      setTodo(e.data.todo)
+      console.log(todo);
+    })
+
   }, []);
 
   return (
     <div>
       <Flex justifyContent={"space-between"}>
         <div>
-          <Heading>Todos and category's</Heading>
+       
         </div>
 
         <div>
@@ -56,7 +62,7 @@ function Todos() {
               <Flex>
                 {cat.map((e, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <Box
                         boxShadow={"lg"}
                         borderRadius={"md"}
@@ -81,17 +87,18 @@ function Todos() {
         )}
       </Flex>
 
-      <Flex justifyContent="space-between" marginTop={"5"}>
+
         <div>
           {todo.length < 1 ? (
             <Heading marginTop={"5"}>No Todos Found</Heading>
           ) : (
-            ""
+            <Todo_Card todo={todo}/>
           )}
         </div>
-      </Flex>
 
-      <Todo_card />
+
+
+      
     </div>
   );
 }
