@@ -121,11 +121,11 @@ function Create_cat() {
         <option value="fas fa-exclamation-triangle">
           Exclamation Triangle
         </option>
-        <option value="yellow">Yellow</option>
-        <option value="black">Black</option>
-        <option value="pink">Pink</option>
-        <option value="orange">Orange</option>
-        <option value="blue">Blue</option>
+        <option value="fas fa-child">Child</option>
+        <option value="fas fa-school">School</option>
+        <option value="fas fa-money-bill-alt">Money</option>
+        <option value="fas fa-shopping-cart">Cart</option>
+        <option value="fas fa-book">Book</option>
       </Select>
 
       <Button
