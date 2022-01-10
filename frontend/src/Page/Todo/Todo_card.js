@@ -103,13 +103,17 @@ function Todo_card({todo}) {
             </Box>
           </Flex>
   
+          <Tooltip label={`${e.priority} Priority`} textTransform={'capitalize'}>
           <Tag colorScheme={check(e.priority)} marginTop={"2"} textTransform={'capitalize'}>
             {e.priority}
           </Tag>
+          </Tooltip>
   
-          <Tag marginTop={"2"} marginLeft={"2"}>
+         <Tooltip label={`Created ${timeAgo.format(e.createdAt)}`}>
+         <Tag marginTop={"2"} marginLeft={"2"}>
             {timeAgo.format(e.createdAt)}
           </Tag>
+         </Tooltip>
   
           {
             e.description ? (
