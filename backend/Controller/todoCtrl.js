@@ -1,4 +1,4 @@
-
+const todoModel = require('../Models/todoModel')
 
 module.exports = {
 
@@ -6,7 +6,12 @@ module.exports = {
 
     },
 
-    createTodo: () => {
+    createTodo: (req ,res) => {
+       
+        const todo = new todoModel(req.body)
+        todo.save()
+        res.json({status:true})
+
 
     },
 

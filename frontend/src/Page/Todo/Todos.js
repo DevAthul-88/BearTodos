@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { Link as WLnk } from "wouter";
 import Axios from "axios";
+import Todo_Card from '../Todo/Todo_card'
+import Todo_card from "../Todo/Todo_card";
 
 function Todos() {
   const [todo, setTodo] = useState([]);
@@ -59,7 +61,7 @@ function Todos() {
                         boxShadow={"lg"}
                         borderRadius={"md"}
                         marginLeft={"3"}
-                        background={`${e.color}.400`}
+                        bg={`${e.color}.300`}
                         padding={4}
                       >
                         <Flex flexWrap={'wrap'}>
@@ -88,6 +90,8 @@ function Todos() {
           )}
         </div>
       </Flex>
+
+      <Todo_card />
     </div>
   );
 }
