@@ -75,6 +75,10 @@ export default function SidebarWithHeader(
       <SidebarContent
         onClose={() => onClose}
         
+        
+        position={'fixed'}
+        left={0}
+        right={0}
         display={{ base: "none", md: "block" }}
       />
       <Drawer

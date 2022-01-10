@@ -1,6 +1,6 @@
 import React, { createContext, useEffect } from "react";
 import Navbar from "../../Components/Navbar";
-import { Container } from "@chakra-ui/react";
+import { Container , Center, VStack} from "@chakra-ui/react";
 import { Route } from "wouter";
 import Explore from "../Todo/Explore";
 import Todos from "../Todo/Todos";
@@ -11,17 +11,21 @@ import Create_todo from '../Todo/Create_todo'
 
 function Home() {
   return (
-    <div>
+    <div  >
       <Navbar />
 
-      <Container maxW="container.md" width="100%">
+
+
+        <Container maxW='container.lg' marginLeft={{ base: "0", md: "72", lg: "72" }}>
         <Route path="/" component={Explore} />
         <Route path="/todos" component={Todos} />
         <Route path="/history" component={History} />
         <Route path="/favorites" component={Favorites} />
         <Route path="/settings" component={Settings} />
         <Route path="/create_todo" component={Create_todo} />
-      </Container>
+        </Container>
+
+
     </div>
   );
 }

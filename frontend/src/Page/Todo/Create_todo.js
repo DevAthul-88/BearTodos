@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "wouter";
 import {
   Input,
   Container,
@@ -12,9 +13,11 @@ import {
 
 function Create_todo() {
   const [loading, setLoading] = useState(false);
+  const [location, setLocation] = useLocation();
 
   function Submit() {
     setLoading(true);
+    setLocation('/')
   }
 
   return (

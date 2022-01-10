@@ -11,11 +11,11 @@ module.exports = {
 
           const user = await User.findOne({email: email})
 
-          if(!user) return res.status(400).send({message: "User not found"})
+          if(!user) return res.json({message: "User not found" , status:false})
 
           const validPassword = await bcrypt.compare(password , user.password)
 
-          if(!validPassword) return res.status(400).send({message: "Invalid password"})
+          if(!validPassword) return res.json({message: "Invalid password", status:false})
 
           const payload = {
               email: user.email,
@@ -44,7 +44,8 @@ module.exports = {
 
           
       } catch (error) {
-          res.status(500).send({message: error.message});
+          
+         return res.status(500).json({message: error.message});
       }
   },
 

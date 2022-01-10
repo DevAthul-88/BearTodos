@@ -50,7 +50,7 @@ function Explore() {
             marginTop={"1.5"}
             color="green.500"
           >
-            100 Done
+            1 Done
           </Text>
         </Box>
 
@@ -71,7 +71,7 @@ function Explore() {
             marginTop={"1.5"}
             color="yellow.500"
           >
-            100 Pending
+            1 Pending
           </Text>
         </Box>
 
@@ -91,7 +91,7 @@ function Explore() {
             marginTop={"1.5"}
             color="red.500"
           >
-            100 Deleted
+            1 Deleted
           </Text>
         </Box>
       </Flex>
