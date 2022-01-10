@@ -8,6 +8,7 @@ import History from "../Todo/History";
 import Favorites from "../Todo/Favourites";
 import Settings from "../Todo/Settings";
 import Create_todo from '../Todo/Create_todo'
+import Create_cat from './Create_cat'
 
 function Home() {
   return (
@@ -23,6 +24,7 @@ function Home() {
         <Route path="/favorites" component={Favorites} />
         <Route path="/settings" component={Settings} />
         <Route path="/create_todo" component={Create_todo} />
+        <Route path="/create_category" component={Create_cat} />
         </Container>
 
 

@@ -1,108 +1,81 @@
-import React from "react";
-import { Button, Flex, Heading } from "@chakra-ui/react";
-import { Table, Thead, Tbody, Tr, Th, Td, chakra, Tfoot } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy } from "react-table";
-
-
-
+import React, { useEffect, useState } from "react";
+import { Button, Flex, Heading, Box, Spinner } from "@chakra-ui/react";
+import { Link as WLnk } from "wouter";
+import Axios from "axios";
+import axios from "axios";
 
 function Todos() {
+  const [todo, setTodo] = useState([]);
+  const [cat, setCat] = useState([]);
+  const [catLoading, setCatLoading] = useState(true);
 
-    const data = React.useMemo(
-        () => [
-          {
-            fromUnit: 'inches',
-            toUnit: 'millimetres (mm)',
-            factor: 25.4,
-          },
-          {
-            fromUnit: 'feet',
-            toUnit: 'centimetres (cm)',
-            factor: 30.48,
-          },
-          {
-            fromUnit: 'yards',
-            toUnit: 'metres (m)',
-            factor: 0.91444,
-          },
-        ],
-        [],
-      )
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem("todo_user"));
 
-      const columns = React.useMemo(
-        () => [
-          {
-            Header: 'To convert',
-            accessor: 'fromUnit',
-          },
-          {
-            Header: 'Into',
-            accessor: 'toUnit',
-          },
-          {
-            Header: 'Multiply by',
-            accessor: 'factor',
-            isNumeric: true,
-          },
-        ],
-        [],
-      )
-
-      const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-      useTable({ columns, data }, useSortBy)
+    Axios.post("/todo/getCat", { id: user.id }).then((e) => {
+      setCat(e.data.cat);
+      console.log(e.data.cat);
+      setCatLoading(false)
+    });
+  }, []);
 
   return (
     <div>
       <Flex justifyContent={"space-between"}>
         <div>
-          <Heading>Todos</Heading>
+          <Heading>Todos and category's</Heading>
         </div>
 
         <div>
-          <Button colorScheme={"green"}>Create category's</Button>
+          <Button colorScheme={"green"} as={WLnk} href={"/create_category"}>
+            Create category's
+          </Button>
         </div>
       </Flex>
 
-      <Table {...getTableProps()} marginTop={'6'}>
-      <Thead>
-        {headerGroups.map((headerGroup) => (
-          <Tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <Th
-                {...column.getHeaderProps(column.getSortByToggleProps())}
-                isNumeric={column.isNumeric}
-              >
-                {column.render('Header')}
-                <chakra.span pl='4'>
-                  {column.isSorted ? (
-                    column.isSortedDesc ? (
-                      <TriangleDownIcon aria-label='sorted descending' />
-                    ) : (
-                      <TriangleUpIcon aria-label='sorted ascending' />
-                    )
-                  ) : null}
-                </chakra.span>
-              </Th>
-            ))}
-          </Tr>
-        ))}
-      </Thead>
-      <Tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row)
-          return (
-            <Tr {...row.getRowProps()}>
-              {row.cells.map((cell) => (
-                <Td {...cell.getCellProps()} isNumeric={cell.column.isNumeric}>
-                  {cell.render('Cell')}
-                </Td>
-              ))}
-            </Tr>
-          )
-        })}
-      </Tbody>
-    </Table>
+     
+
+      <Flex  marginTop={"10"}>
+        {cat.length < 1 ? null : <div>{catLoading ? <Spinner /> : 
+         
+         <Flex>
+           {
+             cat.map((e , index) => {
+               return(
+                 <div>
+                  
+
+                   <Box boxShadow={'lg'} borderRadius={'md'} marginLeft={'3'} background={`${e.color}.400`} padding={4}>
+                    
+                    <Flex>
+
+                    <i className={e.icon}></i>
+
+                    <Heading fontSize='md' marginLeft={'3'}>
+                   {e.title}
+                   </Heading>
+
+
+                    </Flex>
+
+                 </Box>
+
+                 </div>
+               )
+             })
+           }
+         </Flex>
+        }</div>}
+      </Flex>
+      
+
+      {todo.length < 1 ? (
+        <Heading marginTop={"5"} textAlign={"center"}>
+          No Todos Found
+        </Heading>
+      ) : (
+        ""
+      )}
 
     </div>
   );
