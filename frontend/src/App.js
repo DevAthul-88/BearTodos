@@ -8,9 +8,6 @@ import Footer from "./Components/Footer";
 function App() {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState("");
-  
-
-  
 
   useEffect(() => {
     async function checkAuth() {
@@ -25,27 +22,26 @@ function App() {
         if (res.data.valid === false) return localStorage.clear();
 
         let user = JSON.parse(localStorage.getItem("todo_user"));
-        if(user === undefined) return localStorage.clear();
+        if (user === undefined) return localStorage.clear();
 
         if (user !== null && user !== undefined) {
           setUser(user);
-          
         }
       } else {
         setAuth(false);
+        
       }
     }
     checkAuth();
   }, []);
 
-  
-
   return (
     <ChakraProvider>
       <div className="App">
         {auth ? <TodoHome /> : <Home isAuth={setAuth} setUser={setUser} />}
+
+        <Footer />
       </div>
-      <Footer />
     </ChakraProvider>
   );
 }

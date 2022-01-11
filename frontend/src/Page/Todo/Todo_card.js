@@ -18,7 +18,7 @@ import { FaPen, FaCheck, FaTrash } from "react-icons/fa";
 
 function Todo_card({todo}) {
 
- console.log(todo);
+
 
   function check(val){
     if(val === 'extreme'){

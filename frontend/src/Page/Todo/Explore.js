@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect , useState } from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import {
   Flex,
@@ -12,7 +12,16 @@ import {
 import { FaCheck, FaExclamationTriangle, FaTrash } from "react-icons/fa";
 import { Link as wLink} from 'wouter'
 
+
+
 function Explore() {
+
+
+
+
+
+
+
   return (
     <div>
       <Flex>
