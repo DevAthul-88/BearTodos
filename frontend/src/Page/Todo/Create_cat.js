@@ -12,13 +12,15 @@ import {
   CloseButton,
   AlertIcon,
   AlertTitle,
+  useToast
 } from "@chakra-ui/react";
 
 function Create_cat() {
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useLocation();
   const [error, setError] = useState(null);
-
+  const [toaster , showToast] = useState(false)
+  const toast = useToast()
   const [cat, setCat] = useState({
     title: "",
     color: "",
@@ -52,6 +54,7 @@ function Create_cat() {
       }
 
         const res = await Axios.post('/todo/cat', obj)
+        await showToast(true)
          setLocation('/todos')
 
     } catch (error) {
@@ -136,6 +139,19 @@ function Create_cat() {
       >
         Submit
       </Button>
+
+      {
+        toaster ? (
+          toast({
+            title: 'Category created.',
+            description: "i've created category for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        ) : null
+      }
+
     </form>
   );
 }
