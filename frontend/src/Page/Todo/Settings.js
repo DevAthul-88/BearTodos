@@ -13,7 +13,12 @@ import {
   Flex,
   Checkbox,
   Input,
-
+  Alert,
+  AlertDescription,
+  Stack,
+  AlertIcon,
+  AlertTitle,
+  CloseButton
   
 } from "@chakra-ui/react";
 
@@ -26,7 +31,8 @@ function Settings() {
   const [local , setLocal] = useState({firstName:"", lastName:"", email:""})
   const [enable , setEnable] = useState(true)
   const [load, setLoading] = useState(false)
- 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("todo_user"))
     setLocal(user)
@@ -55,7 +61,12 @@ function Settings() {
     }
     setLoading(true)
     const res = await axios.patch('/user/' , userObj)
-     
+      console.log(res);
+
+    if(res.data.error){
+      setError(res.data.error)
+      setLoading(false)
+    }
     if(res.data.message) {
       localStorage.setItem('todo_user', res.data.user)
     }
@@ -64,6 +75,22 @@ function Settings() {
 
   return (
     <div>
+       {error && (
+        <Stack>
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle mr={2}>Alert</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+            <CloseButton
+              position="absolute"
+              right="8px"
+              top="8px"
+              onClick={() => setError(null)}
+            />
+          </Alert>
+        </Stack>
+      )}
+
       <Heading>Settings</Heading>
 
       <Tabs isFitted variant="enclosed" marginTop={"7"}>
@@ -76,8 +103,8 @@ function Settings() {
 
          <form onSubmit={onSubmit}>
          <Input placeholder='Basic usage' value={local.firstName} name='firstName' onChange={onChange} onKeyUp={() => setEnable(false)}/>
-          <Input placeholder='Basic usage' value={local.lastName} name='lastName'  marginTop='2' onChange={onChange} value={local.lastName}/>
-          <Input placeholder='Basic usage' marginTop='2' name='email' value={local.email} onChange={onChange} value={local.email} />
+          <Input placeholder='Basic usage' value={local.lastName} name='lastName'  marginTop='2' onChange={onChange} value={local.lastName} onKeyUp={() => setEnable(false)}/>
+          <Input placeholder='Basic usage' marginTop='2' name='email' value={local.email} onChange={onChange} value={local.email} onKeyUp={() => setEnable(false)}/>
            
            <Button type="submit" colorScheme={'green'} marginTop='2' disabled={enable} isLoading={load}>
              Save

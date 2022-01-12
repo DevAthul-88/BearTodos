@@ -1,133 +1,126 @@
-require('dotenv').config()
+require("dotenv").config();
 const User = require("../Models/userSchema");
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
-  login: async (req , res) => {
-      try {
-         console.log(req.body);
-          const {email , password } = req.body
+  login: async (req, res) => {
+    try {
+      console.log(req.body);
+      const { email, password } = req.body;
 
-          const user = await User.findOne({email: email})
+      const user = await User.findOne({ email: email });
 
-          if(!user) return res.json({message: "User not found" , status:false})
+      if (!user) return res.json({ message: "User not found", status: false });
 
-          const validPassword = await bcrypt.compare(password , user.password)
+      const validPassword = await bcrypt.compare(password, user.password);
 
-          if(!validPassword) return res.json({message: "Invalid password", status:false})
+      if (!validPassword)
+        return res.json({ message: "Invalid password", status: false });
 
-          const payload = {
-              email: user.email,
-              id:user._id,
+      const payload = {
+        email: user.email,
+        id: user._id,
+      };
 
-          }
+      const token = jwt.sign(payload, process.env.TOKEN, {
+        expiresIn: "30d",
+      });
 
-          
+      payload.token = token;
 
-          const token = jwt.sign(payload , process.env.TOKEN , {
-              expiresIn:"30d"
-          })
+      const setUser = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        id: user._id,
+        email: user.email,
+      };
 
-          
-
-          payload.token = token
-
-          const setUser = {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            id: user._id,
-            email: user.email
-        }
-
-          res.send({token: token, status:true, user:setUser})
-
-          
-      } catch (error) {
-          
-         return res.status(500).json({message: error.message});
-      }
+      res.send({ token: token, status: true, user: setUser });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
   },
 
   createUser: async (req, res) => {
     try {
       const { firstName, lastName, email, password } = req.body;
 
-      const existingUser = await User.findOne({email:email})
+      const existingUser = await User.findOne({ email: email });
 
-      if(existingUser) return res.send({message: "User already exists"})
+      if (existingUser) return res.send({ message: "User already exists" });
 
-      const hashedPassword = await bcrypt.hash(password , 10)
+      const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = new User({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: hashedPassword,
-      })
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: hashedPassword,
+      });
 
-      user.save()
-      res.status(200).send({loggedIn: true})
-
+      user.save();
+      res.status(200).send({ loggedIn: true });
     } catch (error) {
-        res.status(500).send({message: error.message});
+      res.status(500).send({ message: error.message });
     }
   },
 
-  verifyUser: (req , res) => {
-
+  verifyUser: (req, res) => {
     try {
+      const token = req.header("Authorization");
 
-        const token = req.header('Authorization')
+      if (!token) return res.status(400).send({ valid: false });
 
-        if(!token) return res.status(400).send({valid: false});
+      const verifyToken = jwt.verify(
+        token,
+        process.env.TOKEN,
+        async (err, data) => {
+          if (err) return res.status(500).send({ valid: false });
 
-        const verifyToken = jwt.verify(token , process.env.TOKEN , async (err , data) => {
-            if(err) return res.status(500).send({valid: false});
+          const user = await User.findById(data.id);
 
-            
+          if (!user) return res.status(400).send({ valid: false });
 
-            const user = await User.findById(data.id)
+          const setUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            id: user._id,
+            email: user.email,
+          };
 
-            if(!user) return res.status(400).send({valid: false});
-
-            const setUser = {
-                firstName: user.firstName,
-                lastName: user.lastName,
-                id: user._id,
-                email: user.email
-            }
-
-            res.send({valid: true , user: setUser});
-        })
-
-        
+          res.send({ valid: true, user: setUser });
+        }
+      );
     } catch (error) {
-        res.status(500).send({message: error.message});
+      res.status(500).send({ message: error.message });
     }
-
   },
 
-  editUser: async (req,res) => {
-       
+  editUser: async (req, res) => {
     try {
-
       const user = {
         id: req.body.id,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.password
-      }
-  
-     let res = await  User.findByIdAndUpdate({_id:user.id} , user)
-     console.log(res);
-     res.send({message:true, user:user})
-      
-    } catch (error) {
-      return res.send({message: error.message})
-    }
- 
+        email: req.body.password,
+      };
 
+      let res = await User.findByIdAndUpdate({ _id: user.id }, user);
+
+      let final = {
+        id: res._id,
+        firstName: res.firstName,
+        lastName: res.lastName,
+        email: res.email,
+        createdDate: res.CreatedDate,
+        createdAt: res.createdAt,
+        updatedAt: res.updatedAt,
+      };
+      res.json({ message: true, user: final });
+    } catch (error) {
+      return res.send({ error: error.message });
+    }
   },
 
   deleteUser: () => {},

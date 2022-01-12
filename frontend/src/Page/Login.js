@@ -54,11 +54,12 @@ export default function Login({ isAuth, setUserLocal }) {
       const res = await axios.post("/user/login", data);
 
      if(res.data.status !== false) {
-      console.log(res);
+  
       localStorage.setItem("todo_token", res.data.token);
       localStorage.setItem("todo_user", JSON.stringify(res.data.user));
       setUserLocal(res.data.user);
       isAuth(res.data.status);
+      window.location.href = '/'
      }
 
       setError(res.data.message);

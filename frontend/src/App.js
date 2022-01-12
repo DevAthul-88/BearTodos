@@ -29,7 +29,6 @@ function App() {
         }
       } else {
         setAuth(false);
-        
       }
     }
     checkAuth();
