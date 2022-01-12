@@ -108,7 +108,27 @@ module.exports = {
 
   },
 
-  editUser: () => {},
+  editUser: async (req,res) => {
+       
+    try {
+
+      const user = {
+        id: req.body.id,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.password
+      }
+  
+     let res = await  User.findByIdAndUpdate({_id:user.id} , user)
+     console.log(res);
+     res.send({message:true, user:user})
+      
+    } catch (error) {
+      return res.send({message: error.message})
+    }
+ 
+
+  },
 
   deleteUser: () => {},
 };
