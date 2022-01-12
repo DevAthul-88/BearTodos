@@ -19,13 +19,23 @@ import {
 
 function Settings() {
 
-  const [local , setLocal] = useState({})
+  const [local , setLocal] = useState({firstName:"", lastName:"", email:""})
   const [enable , setEnable] = useState(true)
  
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("todo_user"))
     setLocal(user)
   },[])
+
+  function onChange(event) {
+    const {name , value} = event.target
+     setLocal((prev) => {
+       return{
+         ...prev,
+         [name]:value
+       }
+     })
+  }
 
 
   return (
@@ -40,9 +50,9 @@ function Settings() {
         <TabPanels>
           <TabPanel>
 
-          <Input placeholder='Basic usage' value={local.firstName} />
-          <Input placeholder='Basic usage'  marginTop='2' value={local.lastName}/>
-          <Input placeholder='Basic usage' marginTop='2' value={local.email} />
+          <Input placeholder='Basic usage' value={local.firstName} name='firstName' onChange={onChange} onKeyUp={() => setEnable(false)}/>
+          <Input placeholder='Basic usage' value={local.lastName} name='lastName'  marginTop='2' onChange={onChange} value={local.lastName}/>
+          <Input placeholder='Basic usage' marginTop='2' name='email' value={local.email} onChange={onChange} value={local.email} />
            
            <Button colorScheme={'green'} marginTop='2' disabled={enable}>
              Save
