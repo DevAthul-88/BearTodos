@@ -60,7 +60,7 @@ function Settings() {
       email: local.email
     }
     setLoading(true)
-    const res = await axios.patch('/user/' , userObj)
+    const res = await axios.put('/user' , userObj)
       console.log(res);
 
     if(res.data.error){

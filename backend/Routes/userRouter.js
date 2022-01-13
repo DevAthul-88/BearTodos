@@ -4,7 +4,7 @@ const userCtrl = require("../Controller/userCtrl");
 router
   .route("/")
   .post(userCtrl.createUser)
-  .patch(userCtrl.editUser)
+  .put(userCtrl.editUser)
   .delete(userCtrl.deleteUser);
 
   router.route('/login').post(userCtrl.login)

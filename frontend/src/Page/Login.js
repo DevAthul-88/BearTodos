@@ -59,7 +59,7 @@ export default function Login({ isAuth, setUserLocal }) {
       localStorage.setItem("todo_user", JSON.stringify(res.data.user));
       setUserLocal(res.data.user);
       isAuth(res.data.status);
-      window.location.href = '/'
+      window.location.href = '/login'
      }
 
       setError(res.data.message);
