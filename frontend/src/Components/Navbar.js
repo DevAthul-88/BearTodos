@@ -36,11 +36,7 @@ import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { Link as RouteLink, useRoute } from "wouter";
 
-let user = '';
-
-
-
-
+let user = "";
 
 interface LinkItemProps {
   name: string;
@@ -55,34 +51,27 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Settings", icon: FiSettings, path: "/settings" },
 ];
 
-export default function SidebarWithHeader(
-
-  {
-    children,
-  }: {
-    children: ReactNode,
-  }
-) {
+export default function SidebarWithHeader({
+  children,
+}: {
+  children: ReactNode,
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
-  useEffect(() => {
-    user = JSON.parse(localStorage.getItem('todo_user'))
-  },[])
 
-  
+  useEffect(() => {
+    user = JSON.parse(localStorage.getItem("todo_user"));
+  }, []);
+
   return (
     <Box>
       <SidebarContent
         onClose={() => onClose}
-        
-        
-        position={'fixed'}
+        position={"fixed"}
         left={0}
         right={0}
         display={{ base: "none", md: "block" }}
       />
       <Drawer
-        
         autoFocus={false}
         isOpen={isOpen}
         placement="left"
@@ -109,9 +98,6 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-
-  
-
   return (
     <Box
       transition="3s ease"
@@ -133,7 +119,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <NavItem
           as={RouteLink}
           href={link.path}
-          
           id="RouterNavLink"
           key={link.name}
           icon={link.icon}
@@ -150,12 +135,8 @@ interface NavItemProps extends FlexProps {
   children: ReactText;
 }
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
-  
- 
-  
   return (
     <Link
-    
       as={"span"}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
@@ -193,17 +174,14 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  async function handleSignOut() {
+    let token = localStorage.getItem("todo_token");
 
- async function handleSignOut(){
-    
-    let token = localStorage.getItem('todo_token')
-
-    if(token){
-         await localStorage.clear()
-         window.location.href = '/login'
-    }
-    else{
-      return null
+    if (token) {
+      await localStorage.clear();
+      window.location.href = "/login";
+    } else {
+      return null;
     }
   }
 

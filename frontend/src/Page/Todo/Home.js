@@ -11,6 +11,7 @@ import Create_todo from '../Todo/Create_todo'
 import Create_cat from './Create_cat'
 
 function Home() {
+
   return (
     <div  >
       <Navbar />
@@ -22,7 +23,9 @@ function Home() {
         <Route path="/todos" component={Todos} />
         <Route path="/history" component={History} />
         <Route path="/favorites" component={Favorites} />
-        <Route path="/settings" component={Settings} />
+        <Route path="/settings" >
+          <Settings/>
+        </Route>
         <Route path="/create_todo" component={Create_todo} />
         <Route path="/create_category" component={Create_cat} />
         </Container>

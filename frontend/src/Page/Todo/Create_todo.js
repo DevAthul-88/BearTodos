@@ -1,6 +1,6 @@
-import React, { useState} from "react";
-import {useLocation} from 'wouter'
-import Axios from 'axios'
+import React, { useState } from "react";
+import { useLocation } from "wouter";
+import Axios from "axios";
 import {
   useToast,
   Input,
@@ -20,61 +20,52 @@ import {
 
 function Create_todo() {
   const [loading, setLoading] = useState(false);
-  const [values, setValue] = useState('high')
+  const [values, setValue] = useState("high");
   const [error, setError] = useState(null);
-  const [toaster , showToast] = useState(false)
-  const [location, setLocation] = useLocation()
-  const toast = useToast()
-  const [todo , setTodo] = useState({
-    title:"",
+  const [toaster, showToast] = useState(false);
+  const [location, setLocation] = useState();
+  const toast = useToast();
+  const [todo, setTodo] = useState({
+    title: "",
     description: "",
-
-  })
-
+  });
 
   function onChange(event) {
-    const {name , value} = event.target
+    const { name, value } = event.target;
     setTodo((prev) => {
-      return{
+      return {
         ...prev,
         [name]: value,
-      }
-    })
-  
+      };
+    });
   }
 
-
-
- async function Submit(e) {
+  async function Submit(e) {
     e.preventDefault();
     setLoading(true);
 
     try {
-
-      let user = JSON.parse(localStorage.getItem("todo_user"))
+      let user = JSON.parse(localStorage.getItem("todo_user"));
 
       const todoObj = {
         title: todo.title,
         description: todo.description,
-        priority:values,
-        id:user.id
-      }
-      
-      await Axios.post('/todo' , todoObj)
-      showToast(true)
-      setLocation('/todos')
-      
+        priority: values,
+        id: user.id,
+      };
+
+      await Axios.post("/todo", todoObj);
+      showToast(true);
+      setLocation("/todos");
     } catch (error) {
-      setLoading(false)
-         setError(error.message)
+      setLoading(false);
+      setError(error.message);
     }
-  
   }
 
   return (
     <form onSubmit={Submit}>
-
-{error && (
+      {error && (
         <Stack>
           <Alert status="error">
             <AlertIcon />
@@ -112,15 +103,15 @@ function Create_todo() {
         Priority
       </Heading>
 
-      <RadioGroup   marginTop={"5"} value={values} onChange={setValue} >
+      <RadioGroup marginTop={"5"} value={values} onChange={setValue}>
         <Stack direction="row">
-          <Radio value="extreme" colorScheme={"green"}  >
+          <Radio value="extreme" colorScheme={"green"}>
             No Time to do
           </Radio>
-          <Radio value="high" colorScheme={"green"}  >
+          <Radio value="high" colorScheme={"green"}>
             High
           </Radio>
-          <Radio value="medium" colorScheme={"green"} >
+          <Radio value="medium" colorScheme={"green"}>
             Medium
           </Radio>
           <Radio value="low" colorScheme={"green"}>
@@ -129,22 +120,23 @@ function Create_todo() {
         </Stack>
       </RadioGroup>
 
-      <Button type="submit" colorScheme="green" marginTop={"5"} isLoading={loading}
-      
+      <Button
+        type="submit"
+        colorScheme="green"
+        marginTop={"5"}
+        isLoading={loading}
       >
         Submit
       </Button>
-      {
-        toaster ? (
-          toast({
-            title: 'Todo created.',
+      {toaster
+        ? toast({
+            title: "Todo created.",
             description: "i've created todo for you.",
-            status: 'success',
+            status: "success",
             duration: 9000,
             isClosable: true,
           })
-        ) : null
-      }
+        : null}
     </form>
   );
 }

@@ -34,6 +34,7 @@ module.exports = {
         lastName: user.lastName,
         id: user._id,
         email: user.email,
+        created:user.CreatedDate
       };
 
       res.send({ token: token, status: true, user: setUser });
@@ -87,6 +88,7 @@ module.exports = {
             lastName: user.lastName,
             id: user._id,
             email: user.email,
+            created:user.CreatedDate
           };
 
           res.send({ valid: true, user: setUser });
@@ -97,33 +99,7 @@ module.exports = {
     }
   },
 
-  editUser: async (req, response) => {
-    try {
-      const user = {
-        id: req.body.id,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.password,
-      };
-
-      let res = await User.findByIdAndUpdate({ _id: user.id }, user);
-
-      let final = {
-        id: res._id,
-        firstName: res.firstName,
-        lastName: res.lastName,
-        email: res.email,
-        createdDate: res.CreatedDate,
-        createdAt: res.createdAt,
-        updatedAt: res.updatedAt,
-      };
-  
-      response.json({ message: true, user: final });
-      
-    } catch (error) {
-      return response.send({ error: error.message });
-    }
-  },
+ 
 
   deleteUser: () => {},
 };
