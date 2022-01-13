@@ -97,7 +97,7 @@ module.exports = {
     }
   },
 
-  editUser: async (req, res) => {
+  editUser: async (req, response) => {
     try {
       const user = {
         id: req.body.id,
@@ -117,11 +117,11 @@ module.exports = {
         createdAt: res.createdAt,
         updatedAt: res.updatedAt,
       };
-      console.log(res)
-      res.json({ message: true, user: final });
+  
+      response.json({ message: true, user: final });
       
     } catch (error) {
-      return res.send({ error: error.message });
+      return response.send({ error: error.message });
     }
   },
 

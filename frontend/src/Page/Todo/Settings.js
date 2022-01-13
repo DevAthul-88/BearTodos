@@ -18,8 +18,8 @@ import {
   Stack,
   AlertIcon,
   AlertTitle,
-  CloseButton
-  
+  CloseButton,
+  useToast
 } from "@chakra-ui/react";
 
 
@@ -27,11 +27,12 @@ import {
 
 function Settings() {
 
-
+  const [toaster , showToast] = useState(false)
   const [local , setLocal] = useState({firstName:"", lastName:"", email:""})
   const [enable , setEnable] = useState(true)
   const [load, setLoading] = useState(false)
   const [error, setError] = useState(null);
+  const toast = useToast()
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("todo_user"))
@@ -61,14 +62,18 @@ function Settings() {
     }
     setLoading(true)
     const res = await axios.put('/user' , userObj)
-      console.log(res);
+    if(res.data.message){
+      setLoading(false)
+    }
 
     if(res.data.error){
       setError(res.data.error)
       setLoading(false)
     }
     if(res.data.message) {
-      localStorage.setItem('todo_user', res.data.user)
+      localStorage.setItem('todo_user', JSON.stringify(res.data.user))
+      window.location.reload()
+      showToast(true)
     }
   }
 
@@ -110,6 +115,18 @@ function Settings() {
              Save
            </Button>
          </form>
+
+         {
+        toaster ? (
+          toast({
+            title: 'Account Edited.',
+            description: "Account edited successfully.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        ) : null
+      }
 
           </TabPanel>
 
