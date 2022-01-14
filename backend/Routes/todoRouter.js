@@ -9,6 +9,8 @@ router.route("/")
 
 router.route('/get').post(todoCtrl.getTodoList)
 
+router.route('/get_one/:id').post(todoCtrl.getTodoById)
+
 router.route('/cat').post(catCtrl.createCategory)
 router.route('/getCat').post(catCtrl.sendCat)
 

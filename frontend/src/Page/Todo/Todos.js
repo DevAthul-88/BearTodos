@@ -9,14 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { Link as WLnk } from "wouter";
 import Axios from "axios";
-import Todo_Card from '../Todo/Todo_card'
-
+import Todo_Card from "../Todo/Todo_card";
 
 function Todos() {
   const [todo, setTodo] = useState([]);
   const [cat, setCat] = useState([]);
   const [catLoading, setCatLoading] = useState(true);
-  const [todoLoading, setTodoLoading] = useState(false)
+  const [todoLoading, setTodoLoading] = useState(false);
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("todo_user"));
@@ -26,19 +25,16 @@ function Todos() {
       setCatLoading(false);
     });
 
-    Axios.post("/todo/get" , { id: user.id }).then((e) => {
-      setTodo(e.data.todo)
+    Axios.post("/todo/get", { id: user.id }).then((e) => {
+      setTodo(e.data.todo);
       console.log(todo);
-    })
-
+    });
   }, []);
 
   return (
     <div>
       <Flex justifyContent={"space-between"}>
-        <div>
-       
-        </div>
+        <div></div>
 
         <div>
           <ButtonGroup isAttached>
@@ -70,10 +66,15 @@ function Todos() {
                         bg={`${e.color}.300`}
                         padding={4}
                       >
-                        <Flex flexWrap={'wrap'}>
+                        <Flex flexWrap={"wrap"}>
                           <i className={e.icon}></i>
 
-                          <Heading fontSize="md" marginLeft={"3"} as={WLnk} href={`/category/${e._id}`}>
+                          <Heading
+                            fontSize="md"
+                            marginLeft={"3"}
+                            as={WLnk}
+                            href={`/category/${e._id}`}
+                          >
                             {e.title}
                           </Heading>
                         </Flex>
@@ -87,18 +88,13 @@ function Todos() {
         )}
       </Flex>
 
-
-        <div>
-          {todo.length < 1 ? (
-            <Heading marginTop={"5"}>No Todos Found</Heading>
-          ) : (
-            <Todo_Card todo={todo}/>
-          )}
-        </div>
-
-
-
-      
+      <div>
+        {todo.length < 1 ? (
+          <Heading marginTop={"5"}>No Todos Found</Heading>
+        ) : (
+          <Todo_Card todo={todo} />
+        )}
+      </div>
     </div>
   );
 }

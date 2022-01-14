@@ -15,6 +15,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { FaPen, FaCheck, FaTrash } from "react-icons/fa";
+import {Link as wLink} from 'wouter'
 
 function Todo_card({ todo }) {
   function check(val) {
@@ -59,8 +60,10 @@ function Todo_card({ todo }) {
 
               <Box>
                 <ButtonGroup>
-                  <Tooltip label="Edit Todo">
+                  <Tooltip label="Edit Todo" >
                     <IconButton
+                    as={wLink}
+                    href={`/edit/${e._id}`}
                       aria-label="edit"
                       icon={<FaPen />}
                       background={"yellow.500"}

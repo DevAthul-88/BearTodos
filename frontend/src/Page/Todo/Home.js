@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { createContext, useEffect } from "react";
 import Navbar from "../../Components/Navbar";
 import { Container , Center, VStack} from "@chakra-ui/react";
@@ -9,6 +10,7 @@ import Favorites from "../Todo/Favourites";
 import Settings from "../Todo/Settings";
 import Create_todo from '../Todo/Create_todo'
 import Create_cat from './Create_cat'
+import Edit_todo from '../Todo/edit_todo'
 
 function Home() {
 
@@ -28,6 +30,11 @@ function Home() {
         </Route>
         <Route path="/create_todo" component={Create_todo} />
         <Route path="/create_category" component={Create_cat} />
+
+        <Route path='/edit/:id'>
+          {params => <Edit_todo id={params.id}/> }
+        </Route>
+
         </Container>
 
 
