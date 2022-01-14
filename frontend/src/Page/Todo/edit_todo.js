@@ -18,14 +18,16 @@ import {
     AlertTitle,
     Spinner
   } from "@chakra-ui/react";
+  import {useLocation} from 'wouter'
 
 function Edit_todo(params) {
 
-    const [todos , setTodos] = useState({})
+ 
     const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [spinners , setSpinner] = useState(true)
   const [toaster, showToast] = useState(false);
+  const [location, setLocation] = useLocation();
   const toast = useToast();
   const [todo, setTodo] = useState({
     title: "",
@@ -69,14 +71,16 @@ function Edit_todo(params) {
           let user = JSON.parse(localStorage.getItem("todo_user"));
     
           const todoObj = {
+             _id:params.id,
             title: todo.title,
             description: todo.description,
             priority: values,
             id: user.id,
           };
     
-          await axios.post("/todo", todoObj);
+          await axios.patch("/todo", todoObj);
           showToast(true);
+          setLocation('/todos')
         } catch (error) {
           setLoading(false);
           setError(error.message);
@@ -156,8 +160,8 @@ function Edit_todo(params) {
                      </Button>
                      {toaster
                        ? toast({
-                           title: "Todo created.",
-                           description: "i've created todo for you.",
+                           title: "Todo Updated.",
+                           description: "i've updated todo for you.",
                            status: "success",
                            duration: 9000,
                            isClosable: true,

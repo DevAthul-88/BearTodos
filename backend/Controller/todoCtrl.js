@@ -14,9 +14,23 @@ module.exports = {
     res.json({ status: true });
   },
 
-  editTodo:  (req , res) => {
+  editTodo: async (req , res) => {
 
-  
+    try {
+
+      let data = req.body
+
+      let re = await todoModel.updateOne({_id: req.body._id},{
+        title: req.body.title,
+        description: req.body.description,
+        priority: req.body.priority,
+      })
+      res.send({status: true})
+      
+    } catch (error) {
+      res.send({error: error});
+    }
+   
   },
 
   deleteTodo: () => {},

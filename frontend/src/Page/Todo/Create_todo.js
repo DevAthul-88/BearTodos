@@ -23,7 +23,7 @@ function Create_todo() {
   const [values, setValue] = useState("high");
   const [error, setError] = useState(null);
   const [toaster, showToast] = useState(false);
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useLocation();
   const toast = useToast();
   const [todo, setTodo] = useState({
     title: "",
