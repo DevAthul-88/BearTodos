@@ -4,9 +4,10 @@ const userCtrl = require("../Controller/userCtrl");
 router
   .route("/")
   .post(userCtrl.createUser)
-  .delete(userCtrl.deleteUser);
+
 
   router.route('/login').post(userCtrl.login)
   router.route('/verify').get(userCtrl.verifyUser)
+  router.route('/delete').post(userCtrl.deleteUser)
 
 module.exports = router;
