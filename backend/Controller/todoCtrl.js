@@ -3,8 +3,19 @@ const todoModel = require("../Models/todoModel");
 
 module.exports = {
   getTodoList: async (req, res) => {
-    const todo = await todoModel.find({id: req.body.id }).sort({isCompleted:1});
+   
+    let todo = null;
 
+    if(req.body.value == 'all'){
+    todo = await todoModel.find({id: req.body.id }).sort({isCompleted:1})
+    }
+    else if(req.body.value == 'unCompleted'){
+      todo = await todoModel.find({id: req.body.id , isCompleted:false})
+    }
+    else{
+      todo = await todoModel.find({id: req.body.id , isCompleted:true})
+    }
+  console.log(todo);
     res.json({ todo: todo });
   },
 
