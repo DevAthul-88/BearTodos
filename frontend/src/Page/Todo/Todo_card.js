@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useState} from "react";
 import * as timeAgo from "timeago.js";
+import axios from 'axios'
 import {
   Box,
   Tag,
@@ -12,10 +13,16 @@ import {
   AccordionIcon,
   AccordionButton,
   AccordionPanel,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  AlertIcon,
+  CloseButton,
+  Stack,
   Heading,
 } from "@chakra-ui/react";
-import { FaPen, FaCheck, FaTrash } from "react-icons/fa";
-import {Link as wLink} from 'wouter'
+import { FaPen, FaCheck, FaTrash, FaStar } from "react-icons/fa";
+import { Link as wLink } from "wouter";
 
 function Todo_card({ todo }) {
   function check(val) {
@@ -30,11 +37,37 @@ function Todo_card({ todo }) {
     }
   }
 
+ async function completeTodo(id){
+    let res = await axios.post('/todo/completeTodo' , {id:id})
+    if(res.data.status){
+      window.location.reload()
+    }
+    if(res.data.error){
+      setError(res.data.error)
+    }
+  }
+  const [error, setError] = useState(null);
   return (
     <div>
       <br />
 
       <Heading marginBottom={"5"}>All todos</Heading>
+
+      {error && (
+        <Stack>
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle mr={2}>Alert</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+            <CloseButton
+              position="absolute"
+              right="8px"
+              top="8px"
+              onClick={() => setError(null)}
+            />
+          </Alert>
+        </Stack>
+      )}
 
       {todo.map((e, index) => {
         return (
@@ -53,17 +86,20 @@ function Todo_card({ todo }) {
                 as="h2"
                 fontSize={"xl"}
                 lineHeight="tight"
+                textDecoration={e.isCompleted ? 'line-through' : 'none'}
                 isTruncated
               >
-                {e.title}
+               {e.title}
               </Box>
 
               <Box>
                 <ButtonGroup>
-                  <Tooltip label="Edit Todo" >
+                 {e.isCompleted ? null : (
+                   <ButtonGroup>
+                      <Tooltip label="Edit Todo" shouldWrapChildren>
                     <IconButton
-                    as={wLink}
-                    href={`/edit/${e._id}`}
+                      as={wLink}
+                      href={`/edit/${e._id}`}
                       aria-label="edit"
                       icon={<FaPen />}
                       background={"yellow.500"}
@@ -72,17 +108,20 @@ function Todo_card({ todo }) {
                     />
                   </Tooltip>
 
-                  <Tooltip label="Complete Todo">
+                  <Tooltip label="Complete Todo" shouldWrapChildren>
                     <IconButton
-                      aria-label="edit"
+                    onClick={() => completeTodo(e._id)}
+                      aria-label="finish"
                       icon={<FaCheck />}
                       background={"green.500"}
                       color="green.100"
                       _hover={{ background: "green.400" }}
                     />
                   </Tooltip>
+                   </ButtonGroup>
+                 )}
 
-                  <Tooltip label="Delete Todo">
+                  <Tooltip label="Delete Todo" shouldWrapChildren>
                     <IconButton
                       aria-label="edit"
                       icon={<FaTrash />}
@@ -112,6 +151,36 @@ function Todo_card({ todo }) {
               <Tag marginTop={"2"} marginLeft={"2"}>
                 {timeAgo.format(e.createdAt)}
               </Tag>
+            </Tooltip>
+
+            {
+              e.isCompleted ? (
+                <Tooltip
+                label='Completed'
+                textTransform={"capitalize"}
+              >
+                <Tag
+                  colorScheme={'green'}
+                  marginTop={"2"}
+                  marginLeft={"2"}
+                  textTransform={"capitalize"}
+                >
+                  Completed
+                </Tag>
+              </Tooltip>
+              ) : null
+            }
+
+            <Tooltip label="Add to favorites" shouldWrapChildren>
+              <IconButton
+              margin={'2'}
+              size={'xs'}
+                aria-label="add"
+                icon={<FaStar />}
+                background={"yellow.500"}
+                color="yellow.100"
+                _hover={{ background: "red.400" }}
+              />
             </Tooltip>
 
             {e.description ? (

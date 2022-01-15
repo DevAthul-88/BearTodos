@@ -3,7 +3,7 @@ const todoModel = require("../Models/todoModel");
 
 module.exports = {
   getTodoList: async (req, res) => {
-    const todo = await todoModel.find({id: req.body.id });
+    const todo = await todoModel.find({id: req.body.id }).sort({isCompleted:1});
 
     res.json({ todo: todo });
   },
@@ -46,5 +46,16 @@ module.exports = {
        res.json({ status: false , error: error});
      }
   
+  },
+
+  completeTodo: async (req , res) => {
+    try {
+
+      let re = await todoModel.updateOne({_id:req.body.id}, {isCompleted:true})
+      
+       res.json({status: true})
+    } catch (error) {
+      res.json({error: error})
+    }
   }
 };

@@ -14,6 +14,7 @@ router.route('/get_one/:id').post(todoCtrl.getTodoById)
 router.route('/cat').post(catCtrl.createCategory)
 router.route('/getCat').post(catCtrl.sendCat)
 
+router.route('/completeTodo').post(todoCtrl.completeTodo)
 
 
 module.exports = router;
