@@ -27,7 +27,6 @@ module.exports = {
   sendCatById: async (req, res) => {
     try {
       const re = await catSchema.findOne({ _id: req.params.id });
-      console.log(req.params.id);
       res.json({ cat: re });
     } catch (error) {
       res.send({ message: error.message });
@@ -37,13 +36,14 @@ module.exports = {
   createCatBasedTodo: async (req, res) => {
     try {
       const { data, id } = req.body;
-
+      console.log(req.body);
       const re = await catSchema.updateOne(
         { _id: id },
         {
           $push: { todoArr: data },
         }
       );
+      res.json({status: true})
     } catch (error) {
         res.json({error:error.message});
     }

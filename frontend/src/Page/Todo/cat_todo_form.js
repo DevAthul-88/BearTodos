@@ -54,7 +54,7 @@ function Create_cat_todo({id}) {
         id: user.id,
       };
 
-      await Axios.post("/create_cat", {data:todoObj , id:id});
+      await Axios.post("/todo/create_cat", {data:todoObj , id:id});
       showToast(true);
       setLocation(`/category/${id}`);
     } catch (error) {
