@@ -32,6 +32,7 @@ import {
   FiBell,
   FiChevronDown,
 } from "react-icons/fi";
+import {FaListOl , FaStickyNote , FaUser} from 'react-icons/fa'
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { Link as RouteLink, useRoute } from "wouter";
@@ -45,10 +46,10 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, path: "/" },
-  { name: "Todos", icon: FiTrendingUp, path: "/todos" },
-  { name: "Category", icon: FiCompass, path: "/category" },
+  { name: "Todos", icon: FaListOl, path: "/todos" },
+  { name: "Category", icon: FaStickyNote, path: "/category" },
   { name: "Favourites", icon: FiStar, path: "/favorites" },
-  { name: "Profile", icon: FiSettings, path: "/profile" },
+  { name: "Profile", icon: FaUser, path: "/profile" },
 ];
 
 export default function SidebarWithHeader({
