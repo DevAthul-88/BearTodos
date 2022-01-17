@@ -11,6 +11,7 @@ import Settings from "../Todo/Settings";
 import Create_todo from '../Todo/Create_todo'
 import Create_cat from './Create_cat'
 import Edit_todo from '../Todo/edit_todo'
+import Cat from '../Todo/Cat'
 
 function Home() {
 
@@ -33,6 +34,10 @@ function Home() {
 
         <Route path='/edit/:id'>
           {params => <Edit_todo id={params.id}/> }
+        </Route>
+
+        <Route path='/category/:id'>
+           {params => <Cat id={params.id}/>}
         </Route>
 
         </Container>

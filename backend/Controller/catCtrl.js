@@ -28,5 +28,18 @@ module.exports  = {
         } catch (error) {
             console.log(error.message);
         }
+    },
+
+    sendCatById: async (req , res) => {
+
+        try {
+
+            const re = await catSchema.findOne({_id: req.params.id})
+            console.log(req.params.id);
+            res.json({cat:re})
+            
+        } catch (error) {
+            res.send({message: error.message})
+        }
     }
 }
