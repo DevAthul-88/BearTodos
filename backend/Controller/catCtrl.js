@@ -48,4 +48,25 @@ module.exports = {
         res.json({error:error.message});
     }
   },
+
+  editCatTodo: async function(req , res){
+    try {
+      
+    } catch (error) {
+      
+    }
+  },
+
+  catTodoById: async function(req , res){
+
+    try {
+       let {id} = req.params
+      const re = await catSchema.findOne( { todoArr : { $elemMatch : { _id : id} } })
+       
+      res.json({todo: re})
+
+    } catch (error) {
+      res.json({error:error.message});
+    }
+  }
 };

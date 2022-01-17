@@ -12,7 +12,8 @@ import Create_todo from "../Todo/Create_todo";
 import Create_cat from "./Create_cat";
 import Edit_todo from "../Todo/edit_todo";
 import Cat from "../Todo/Cat";
-import Cat_from from '../Todo/cat_todo_form'
+import Cat_from from "../Todo/cat_todo_form";
+import Cat_todo_edit from '../Todo/Cat_todo_edit'
 
 function Home() {
   return (
@@ -39,8 +40,10 @@ function Home() {
 
         <Route path="/category/:id">{(params) => <Cat id={params.id} />}</Route>
         <Route path="/create_todo_category/:id">
-          {params => <Cat_from id={params.id}/>}
-
+          {(params) => <Cat_from id={params.id} />}
+        </Route>
+        <Route path="/edit_todo_category/:id">
+          {(params) => <Cat_todo_edit id={params.id} />}
         </Route>
       </Container>
     </div>

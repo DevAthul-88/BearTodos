@@ -3,6 +3,8 @@ import axios from "axios";
 import * as timeAgo from 'timeago.js'
 import { Heading, Spinner, Flex, Tag, Button } from "@chakra-ui/react";
 import {Link as WLink} from 'wouter'
+import TodoCard from '../Todo/Todo_card'
+import Card from "../../Components/Todo/Card";
 
 function Cat({ id }) {
   const [data, setData] = useState({});
@@ -20,7 +22,7 @@ function Cat({ id }) {
         setData(error);
       });
   }, []);
-  console.log(data);
+ 
   return (
     <div>
       {loading ? (
@@ -30,7 +32,7 @@ function Cat({ id }) {
       ) : (
         <div>
          
-         <Flex justifyContent="space-between">
+         <Flex justifyContent="space-between" marginBottom={'5'}>
          <Heading colorScheme={data.color}>
             {data.title}
             {`(${data.todoArr.length})`}
@@ -45,10 +47,14 @@ function Cat({ id }) {
           <Button colorScheme={"green"} as={WLink} href={`/create_todo_category/${id}`}>
               Create a new todo
           </Button>
-     
+              
 
          </Flex>
-
+              {
+                data.todoArr.length > 0 ? <Card todo={data.todoArr} /> : <Heading>
+                  No todos found
+                </Heading>
+              }
         </div>
       )}
     </div>
