@@ -62,51 +62,12 @@ function Todos() {
               Create todo
             </Button>
 
-            <Button colorScheme={"blue"} as={WLnk} href={"/create_category"}>
-              Create category
-            </Button>
+          
           </ButtonGroup>
         </div>
       </Flex>
 
-      <Flex marginTop={"10"}>
-        {cat.length < 1 ? null : (
-          <div>
-            {catLoading ? (
-              <Spinner />
-            ) : (
-              <Flex>
-                {cat.map((e, index) => {
-                  return (
-                    <div key={index}>
-                      <Box
-                        boxShadow={"lg"}
-                        borderRadius={"md"}
-                        marginLeft={"3"}
-                        bg={`${e.color}.300`}
-                        padding={4}
-                      >
-                        <Flex flexWrap={"wrap"}>
-                          <i className={e.icon}></i>
-
-                          <Heading
-                            fontSize="md"
-                            marginLeft={"3"}
-                            as={WLnk}
-                            href={`/category/${e._id}`}
-                          >
-                            {e.title}
-                          </Heading>
-                        </Flex>
-                      </Box>
-                    </div>
-                  );
-                })}
-              </Flex>
-            )}
-          </div>
-        )}
-      </Flex>
+      
 
       <div>
         {todo.length < 1 ? (

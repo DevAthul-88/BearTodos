@@ -5,9 +5,9 @@ import { Container, Center, VStack } from "@chakra-ui/react";
 import { Route } from "wouter";
 import Explore from "../Todo/Explore";
 import Todos from "../Todo/Todos";
-import History from "../Todo/History";
+import Category from "../Todo/Category";
 import Favorites from "../Todo/Favourites";
-import Settings from "../Todo/Settings";
+import Profile from "./Profile";
 import Create_todo from "../Todo/Create_todo";
 import Create_cat from "./Create_cat";
 import Edit_todo from "../Todo/edit_todo";
@@ -26,10 +26,10 @@ function Home() {
       >
         <Route path="/" component={Explore} />
         <Route path="/todos" component={Todos} />
-        <Route path="/history" component={History} />
+        <Route path="/category" component={Category} />
         <Route path="/favorites" component={Favorites} />
-        <Route path="/settings">
-          <Settings />
+        <Route path="/profile">
+          <Profile />
         </Route>
         <Route path="/create_todo" component={Create_todo} />
         <Route path="/create_category" component={Create_cat} />

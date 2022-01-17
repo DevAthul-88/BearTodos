@@ -55,7 +55,7 @@ function Create_cat() {
 
         const res = await Axios.post('/todo/cat', obj)
         await showToast(true)
-         setLocation('/todos')
+         setLocation('/category')
 
     } catch (error) {
         setError(error.message)

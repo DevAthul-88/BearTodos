@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCheck } from "react-icons/fa";
 
-function Settings() {
+function Profile() {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
@@ -33,13 +33,10 @@ function Settings() {
 
   return (
     <div>
-      <Heading>Settings</Heading>
+      <Heading>Profile</Heading>
 
       <Tabs isFitted variant="enclosed" marginTop={"7"}>
-        <TabList mb="1em">
-          <Tab>Profile</Tab>
-          <Tab>Settings</Tab>
-        </TabList>
+       
         <TabPanels>
           <TabPanel>
             <Avatar size="2xl" name={`${user.firstName} ${user.lastName}`} />
@@ -60,13 +57,11 @@ function Settings() {
             </List>
           </TabPanel>
 
-          <TabPanel>
-            <Checkbox colorScheme={"red"}>Move deleted todos to trash</Checkbox>
-          </TabPanel>
+        
         </TabPanels>
       </Tabs>
     </div>
   );
 }
 
-export default Settings;
+export default Profile;

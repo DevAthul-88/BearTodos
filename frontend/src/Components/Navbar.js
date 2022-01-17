@@ -46,9 +46,9 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, path: "/" },
   { name: "Todos", icon: FiTrendingUp, path: "/todos" },
-  { name: "History", icon: FiCompass, path: "/history" },
+  { name: "Category", icon: FiCompass, path: "/category" },
   { name: "Favourites", icon: FiStar, path: "/favorites" },
-  { name: "Settings", icon: FiSettings, path: "/settings" },
+  { name: "Profile", icon: FiSettings, path: "/profile" },
 ];
 
 export default function SidebarWithHeader({
@@ -247,7 +247,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
               <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
+             
               <MenuDivider />
               <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
             </MenuList>
