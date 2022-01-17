@@ -40,9 +40,10 @@ module.exports = {
   },
 
   deleteTodo: async (req, res) => {
+
     try {
       let re = await todoModel.deleteOne({ _id: req.body.id });
-      console.log(re);
+
       res.json({ status: true });
     } catch (error) {
       res.json({ error: error });

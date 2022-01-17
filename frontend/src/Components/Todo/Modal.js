@@ -11,14 +11,23 @@ import {
   ModalOverlay,
   ModalHeader,
   ModalCloseButton,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  AlertIcon,
+  CloseButton,
+  Stack
 } from "@chakra-ui/react";
 
 function Modals({ isOpen, isClose, id }) {
-
+  const [error, setError] = useState(null);
     async function deleteTodo(ids) {
       let res = await axios.post("/todo/delete", { id: ids });
       if(res.data.status){
         window.location.reload();
+      }
+      if(res.data.error){
+        setError(res.data.error)
       }
     }
 
@@ -31,6 +40,22 @@ function Modals({ isOpen, isClose, id }) {
 
   return (
     <>
+     {error && (
+        <Stack>
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle mr={2}>Alert</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+            <CloseButton
+              position="absolute"
+              right="8px"
+              top="8px"
+              onClick={() => setError(null)}
+            />
+          </Alert>
+        </Stack>
+      )}
+
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={isClose}>
         <ModalOverlay />
         <ModalContent>

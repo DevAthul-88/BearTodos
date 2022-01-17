@@ -5,7 +5,8 @@ const catCtrl = require("../Controller/catCtrl");
 router.route("/")
 .post(todoCtrl.createTodo)
 .patch(todoCtrl.editTodo)
-.delete(todoCtrl.deleteTodo);
+
+router.route("/delete").post(todoCtrl.deleteTodo);
 
 router.route('/get').post(todoCtrl.getTodoList)
 
