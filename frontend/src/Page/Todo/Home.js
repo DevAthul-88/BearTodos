@@ -5,15 +5,15 @@ import { Container, Center, VStack } from "@chakra-ui/react";
 import { Route } from "wouter";
 import Explore from "../Todo/Explore";
 import Todos from "../Todo/Todos";
-import Category from "../Todo/Category";
+import Category from "../Todo/Category/Category";
 import Favorites from "../Todo/Favourites";
 import Profile from "./Profile";
 import Create_todo from "../Todo/Create_todo";
-import Create_cat from "./Create_cat";
+import Create_cat from "./Category/Create_cat";
 import Edit_todo from "../Todo/edit_todo";
-import Cat from "../Todo/Cat";
-import Cat_from from "../Todo/cat_todo_form";
-import Cat_todo_edit from '../Todo/Cat_todo_edit'
+import Cat from "../Todo/Category/Cat";
+import Cat_from from "../Todo/Category/cat_todo_form";
+import Cat_todo_edit from '../Todo/Category/Cat_todo_edit'
 
 function Home() {
   return (

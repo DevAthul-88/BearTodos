@@ -60,7 +60,7 @@ function Todo_card({ todo }) {
     <div>
       <br />
 
-      <Heading marginBottom={"5"}>All todos</Heading>
+      <Heading marginBottom={"5"} fontSize={'lg'}>UnCategorized Todos</Heading>
 
       {error && (
         <Stack>

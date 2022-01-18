@@ -71,7 +71,7 @@ function Todos() {
 
       <div>
         {todo.length < 1 ? (
-          <Heading marginTop={"5"}>No Todos Found</Heading>
+          <Heading marginTop={"5"} fontSize={'lg'}>No Todos Found</Heading>
         ) : (
           <Todo_Card todo={todo} />
         )}

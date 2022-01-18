@@ -44,7 +44,7 @@ function Category() {
             {catLoading ? (
               <Spinner />
             ) : (
-              <Flex>
+              <Flex flexWrap={'wrap'}>
                 {cat.map((e, index) => {
                   return (
                     <div key={index}>
@@ -53,9 +53,10 @@ function Category() {
                         
                         marginLeft={"3"}
                         bg={`${e.color}.300`}
-                        padding={4}
+                        padding={6}
+                        className={'cat_box'}
                       >
-                        <Flex flexWrap={"wrap"}>
+                        <Flex >
                           <i className={e.icon}></i>
 
                           <Heading

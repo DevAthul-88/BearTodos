@@ -3,8 +3,8 @@ import axios from "axios";
 import * as timeAgo from 'timeago.js'
 import { Heading, Spinner, Flex, Tag, Button } from "@chakra-ui/react";
 import {Link as WLink} from 'wouter'
-import TodoCard from '../Todo/Todo_card'
-import Card from "../../Components/Todo/Card";
+import TodoCard from '../Todo_card'
+import Card from "../../../Components/Todo/Card";
 
 function Cat({ id }) {
   const [data, setData] = useState({});

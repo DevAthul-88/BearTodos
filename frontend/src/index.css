@@ -27,3 +27,6 @@ code {
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
+.cat_box{
+  border: 2px solid rgb(68, 66, 66);
+}
