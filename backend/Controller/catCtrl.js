@@ -36,37 +36,44 @@ module.exports = {
   createCatBasedTodo: async (req, res) => {
     try {
       const { data, id } = req.body;
-      console.log(req.body);
+
       const re = await catSchema.updateOne(
         { _id: id },
         {
           $push: { todoArr: data },
         }
       );
-      res.json({status: true})
+      res.json({ status: true });
     } catch (error) {
-        res.json({error:error.message});
+      res.json({ error: error.message });
     }
   },
 
-  editCatTodo: async function(req , res){
+  editCatTodo: async function (req, res) {
+
     try {
-      
+      let { id } = req.params.id;
+      let { todo } = req.body;
+
+      const re = await catSchema.updateOne({ "todoArr._id": id }, { $set: { todo } });
+      console.log(re);
+      res.send({ status: true });
     } catch (error) {
-      
+      res.json({ error: error.message });
     }
   },
 
-  catTodoById: async function(req , res){
-
+  catTodoById: async function (req, res) {
     try {
-       let {id} = req.params
-      const re = await catSchema.findOne( { todoArr : { $elemMatch : { _id : id} } })
-       
-      res.json({todo: re})
-
+      let { id } = req.params;
+      const re = await catSchema.findOne({
+        todoArr: { $elemMatch: { _id: id } },
+      });
+      let final = re.todoArr.filter((e) => e._id === id);
+      console.log(final);
+      res.json({ todo: final[0] });
     } catch (error) {
-      res.json({error:error.message});
+      res.json({ error: error.message });
     }
-  }
+  },
 };

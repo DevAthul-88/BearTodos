@@ -44,6 +44,7 @@ function Edit_todo(params) {
              setTodo(todo.data.todo)
              setValue(todo.data.todo.priority)
              setSpinner(false)
+             console.log(todo.data);
         }
   
         fetchTodo()
@@ -77,10 +78,10 @@ function Edit_todo(params) {
             priority: values,
             id: user.id,
           };
-    
-          await axios.patch("/todo", todoObj);
-          showToast(true);
-          setLocation('/todos')
+     
+          await axios.put(`/todo/edit_cat_todo/${params.id}`, {todo:todoObj});
+          // showToast(true);
+          // setLocation(`/category`)
         } catch (error) {
           setLoading(false);
           setError(error.message);
