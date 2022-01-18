@@ -41,7 +41,7 @@ function Edit_todo(params) {
         setTodo(todo.data.todo);
         setValue(todo.data.todo.priority);
         setSpinner(false);
-        console.log(todo);
+  
       }
 
       fetchTodo();
@@ -60,7 +60,7 @@ function Edit_todo(params) {
 
   async function Submit(e) {
     e.preventDefault();
-    // setLoading(true);
+    setLoading(true);
 
     try {
       let user = JSON.parse(localStorage.getItem("todo_user"));
@@ -74,8 +74,8 @@ function Edit_todo(params) {
       };
 
       await axios.put(`/todo/edit_cat_todo/${params.id}`, {todo:todoObj});
-      // showToast(true);
-      // setLocation(`/category`)
+      showToast(true);
+      setLocation(`/category`)
     } catch (error) {
       setLoading(false);
       setError(error.message);

@@ -38,7 +38,7 @@ module.exports = {
   createCatBasedTodo: async (req, res) => {
     try {
       const { data, id } = req.body;
-      data.todoid = objectid()
+      data._id = objectid()
 
       const re = await catSchema.updateOne(
         { _id: id },
@@ -57,15 +57,20 @@ module.exports = {
       let { id } = req.params;
       let { todo } = req.body;
       const re = await catSchema.updateOne(
-        { "todoArr.todoid": id },
+        { "todoArr._id": objectId(id) },
         {
-          $set: todo,
+          $set:{
+            "todoArr.$.title":todo.title,
+            "todoArr.$.description":todo.description,
+            "todoArr.$.priority":todo.priority,
+          },
         }
       );
       console.log(re);
+      console.log(req.body);
       res.send({ status: true });
     } catch (error) {
-      console.log("some error occurred" + " " + error.message);
+      console.log(error.message);
       return res.json({ error: error.message });
     }
   },
@@ -74,9 +79,9 @@ module.exports = {
     try {
       let { id } = req.params;
       const re = await catSchema.findOne({
-        todoArr: { $elemMatch: { todoid: objectId(id) } },
+        todoArr: { $elemMatch: { _id: objectId(id) } },
       });
-      let final = re.todoArr.filter((e) => e.todoid == id);
+      let final = re.todoArr.filter((e) => e._id == id);
       res.json({ todo: final[0]});
     } catch (error) {
       console.log(error.message);
