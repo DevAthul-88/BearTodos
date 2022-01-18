@@ -1,5 +1,7 @@
 const catModel = require("../Models/catModel");
 const catSchema = require("../Models/catModel");
+const objectid = require("objectid")
+const objectId = require('mongodb').ObjectId
 
 module.exports = {
   createCategory: async (req, res) => {
@@ -36,6 +38,7 @@ module.exports = {
   createCatBasedTodo: async (req, res) => {
     try {
       const { data, id } = req.body;
+      data.todoid = objectid()
 
       const re = await catSchema.updateOne(
         { _id: id },
@@ -50,16 +53,20 @@ module.exports = {
   },
 
   editCatTodo: async function (req, res) {
-
     try {
-      let { id } = req.params.id;
+      let { id } = req.params;
       let { todo } = req.body;
-
-      const re = await catSchema.updateOne({ "todoArr._id": id }, { $set: { todo } });
+      const re = await catSchema.updateOne(
+        { "todoArr.todoid": id },
+        {
+          $set: todo,
+        }
+      );
       console.log(re);
       res.send({ status: true });
     } catch (error) {
-      res.json({ error: error.message });
+      console.log("some error occurred" + " " + error.message);
+      return res.json({ error: error.message });
     }
   },
 
@@ -67,12 +74,12 @@ module.exports = {
     try {
       let { id } = req.params;
       const re = await catSchema.findOne({
-        todoArr: { $elemMatch: { _id: id } },
+        todoArr: { $elemMatch: { todoid: objectId(id) } },
       });
-      let final = re.todoArr.filter((e) => e._id === id);
-      console.log(final);
-      res.json({ todo: final[0] });
+      let final = re.todoArr.filter((e) => e.todoid == id);
+      res.json({ todo: final[0]});
     } catch (error) {
+      console.log(error.message);
       res.json({ error: error.message });
     }
   },

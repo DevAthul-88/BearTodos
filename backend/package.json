@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.3.0",
     "mongoose": "^6.1.5",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "objectid": "^3.2.1"
   }
 }

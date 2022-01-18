@@ -108,7 +108,7 @@ function Card({ todo }) {
                       <Tooltip label="Edit Todo" shouldWrapChildren>
                         <IconButton
                           as={wLink}
-                          href={`/edit_todo_category/${e._id}`}
+                          href={`/edit_todo_category/${e.todoid}`}
                           aria-label="edit"
                           icon={<FaPen />}
                           background={"yellow.500"}
