@@ -21,7 +21,7 @@ import {
   Stack,
   Heading,
 } from "@chakra-ui/react";
-import Model from "../../Components/Todo/Modal";
+import Model from "../../Components/Todo/CatModel";
 import { FaPen, FaCheck, FaTrash, FaStar } from "react-icons/fa";
 import { Link as wLink } from "wouter";
 

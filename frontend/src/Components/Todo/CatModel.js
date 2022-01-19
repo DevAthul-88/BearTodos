@@ -16,21 +16,21 @@ import {
   AlertTitle,
   AlertIcon,
   CloseButton,
-  Stack
+  Stack,
 } from "@chakra-ui/react";
-
+import {useLocation} from 'wouter'
 function Modals({ isOpen, isClose, id }) {
   const [error, setError] = useState(null);
-    async function deleteTodo(ids) {
-      let res = await axios.post("/todo/delete", { id: ids });
-      if(res.data.status){
-        window.location.reload();
-      }
-      if(res.data.error){
-        setError(res.data.error)
-      }
+  const [location , setLocation] = useLocation()
+  async function deleteTodo(ids) {
+    let res = await axios.post(`/todo/deleteTodo/${id}`, { id: ids });
+    if (res.data.status) {
+      setLocation('/category')
     }
-
+    if (res.data.error) {
+      setError(res.data.error);
+    }
+  }
 
   const { onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef();
@@ -40,7 +40,7 @@ function Modals({ isOpen, isClose, id }) {
 
   return (
     <>
-     {error && (
+      {error && (
         <Stack>
           <Alert status="error">
             <AlertIcon />
@@ -71,7 +71,9 @@ function Modals({ isOpen, isClose, id }) {
             <Button colorScheme="blue" mr={3} onClick={() => isClose(false)}>
               Cancel
             </Button>
-            <Button colorScheme="red" onClick={() => deleteTodo(id)}>Delete</Button>
+            <Button colorScheme="red" onClick={() => deleteTodo(id)}>
+              Delete
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
