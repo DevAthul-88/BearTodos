@@ -29,7 +29,7 @@ function Card({ todo , _id}) {
 
   const [match , params] = useRoute('/category/:id')
   const [location , setLocation] = useLocation()
-
+  
 
   function check(val) {
     if (val === "extreme") {
@@ -46,7 +46,7 @@ function Card({ todo , _id}) {
   async function completeTodo(id , ids) {
     let res = await axios.post("/todo/completeCatTodo", { _id: id , id: params.id});
     if (res.data.status) {
-      setLocation(`/category/${params.id}`)
+      window.location.reload();
     }
     if (res.data.error) {
       setError(res.data.error);

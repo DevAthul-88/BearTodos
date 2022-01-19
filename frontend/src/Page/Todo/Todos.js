@@ -30,7 +30,6 @@ function Todos() {
 
     Axios.post("/todo/get", { id: user.id , value:drop}).then((e) => {
       setTodo(e.data.todo);
-      console.log(todo);
     });
   }, [drop]);
 

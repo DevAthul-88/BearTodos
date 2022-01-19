@@ -23,9 +23,13 @@ import {
 } from "@chakra-ui/react";
 import Model from "../../Components/Todo/Modal";
 import { FaPen, FaCheck, FaTrash, FaStar } from "react-icons/fa";
-import { Link as wLink } from "wouter";
+import { Link as wLink , useLocation } from "wouter";
 
 function Todo_card({ todo }) {
+
+
+  const [location, setLocation] = useLocation();
+
   function check(val) {
     if (val === "extreme") {
       return "red";

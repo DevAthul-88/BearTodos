@@ -11,7 +11,6 @@ module.exports = {
     } else {
       todo = await todoModel.find({ id: req.body.id, isCompleted: true });
     }
-    console.log(todo);
     res.json({ todo: todo });
   },
 
