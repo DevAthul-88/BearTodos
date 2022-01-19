@@ -19,11 +19,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import {useLocation} from 'wouter'
-function Modals({ isOpen, isClose, id }) {
+function Modals({ isOpen, isClose, id ,_id }) {
   const [error, setError] = useState(null);
   const [location , setLocation] = useLocation()
-  async function deleteTodo(ids) {
-    let res = await axios.post(`/todo/deleteTodo/${id}`, { id: ids });
+  async function deleteTodo(ids , id) {
+    let res = await axios.post(`/todo/deleteTodo/${id}`, { id: ids , _id:id });
     if (res.data.status) {
       setLocation('/category')
     }
@@ -71,7 +71,7 @@ function Modals({ isOpen, isClose, id }) {
             <Button colorScheme="blue" mr={3} onClick={() => isClose(false)}>
               Cancel
             </Button>
-            <Button colorScheme="red" onClick={() => deleteTodo(id)}>
+            <Button colorScheme="red" onClick={() => deleteTodo(id , _id)}>
               Delete
             </Button>
           </ModalFooter>

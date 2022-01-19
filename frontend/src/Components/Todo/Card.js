@@ -25,7 +25,7 @@ import Model from "../../Components/Todo/CatModel";
 import { FaPen, FaCheck, FaTrash, FaStar } from "react-icons/fa";
 import { Link as wLink } from "wouter";
 
-function Card({ todo }) {
+function Card({ todo , _id}) {
   function check(val) {
     if (val === "extreme") {
       return "red";
@@ -39,7 +39,7 @@ function Card({ todo }) {
   }
 
   async function completeTodo(id) {
-    let res = await axios.post("/todo/completeTodo", { id: id });
+    let res = await axios.post("/todo/completeTodo", { id: id});
     if (res.data.status) {
       window.location.reload();
     }
@@ -207,7 +207,7 @@ function Card({ todo }) {
         );
       })}
 
-      <Model id={id} isOpen={mode} isClose={showModel} />
+      <Model id={id} _id={_id} isOpen={mode} isClose={showModel} />
     </div>
   );
 }

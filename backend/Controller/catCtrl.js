@@ -91,9 +91,9 @@ module.exports = {
 
   deleteCatTodo: async function (req, res) {
     try {
-      const { id } = req.body;
-      
-      const re = await catSchema.findOneAndUpdate({todoArr:{$pull:{_id:objectId(id) }}})
+      const { id , _id } = req.body;
+
+      const re = await catSchema.findOneAndUpdate({_id:objectId(_id) } , {$pull:{'todoArr':{_id:objectId(id)}}})
       res.json({ status: true });
     } catch (error) {
       res.json({error: error.message})
