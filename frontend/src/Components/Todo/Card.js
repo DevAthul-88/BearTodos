@@ -23,9 +23,14 @@ import {
 } from "@chakra-ui/react";
 import Model from "../../Components/Todo/CatModel";
 import { FaPen, FaCheck, FaTrash, FaStar } from "react-icons/fa";
-import { Link as wLink } from "wouter";
+import { Link as wLink ,useRoute , useLocation} from "wouter";
 
 function Card({ todo , _id}) {
+
+  const [match , params] = useRoute('/category/:id')
+  const [location , setLocation] = useLocation()
+
+
   function check(val) {
     if (val === "extreme") {
       return "red";
@@ -38,10 +43,10 @@ function Card({ todo , _id}) {
     }
   }
 
-  async function completeTodo(id) {
-    let res = await axios.post("/todo/completeTodo", { id: id});
+  async function completeTodo(id , ids) {
+    let res = await axios.post("/todo/completeCatTodo", { _id: id , id: params.id});
     if (res.data.status) {
-      window.location.reload();
+      setLocation(`/category/${params.id}`)
     }
     if (res.data.error) {
       setError(res.data.error);
@@ -119,7 +124,7 @@ function Card({ todo , _id}) {
 
                       <Tooltip label="Complete Todo" shouldWrapChildren>
                         <IconButton
-                          onClick={() => completeTodo(e._id)}
+                          onClick={() => completeTodo(e._id , _id)}
                           aria-label="finish"
                           icon={<FaCheck />}
                           background={"green.500"}

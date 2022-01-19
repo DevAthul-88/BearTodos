@@ -19,5 +19,6 @@ router.route("/edit_cat_todo/:id").put(catCtrl.editCatTodo);
 router.route("/edit_todo_category/:id").post(catCtrl.catTodoById);
 router.route("/completeTodo").post(todoCtrl.completeTodo);
 router.route("/deleteTodo/:id").post(catCtrl.deleteCatTodo);
+router.route("/completeCatTodo").post(catCtrl.finishCatTodo);
 
 module.exports = router;

@@ -52,6 +52,7 @@ function Create_cat_todo({id}) {
         title: todo.title,
         description: todo.description,
         priority: values,
+        isCompleted: false,
         id: user.id,
       };
 

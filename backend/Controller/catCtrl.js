@@ -66,8 +66,7 @@ module.exports = {
           },
         }
       );
-      console.log(re);
-      console.log(req.body);
+
       res.send({ status: true });
     } catch (error) {
       console.log(error.message);
@@ -91,12 +90,35 @@ module.exports = {
 
   deleteCatTodo: async function (req, res) {
     try {
-      const { id , _id } = req.body;
+      const { id, _id } = req.body;
 
-      const re = await catSchema.findOneAndUpdate({_id:objectId(_id) } , {$pull:{'todoArr':{_id:objectId(id)}}})
+      const re = await catSchema.findOneAndUpdate(
+        { _id: objectId(_id) },
+        { $pull: { todoArr: { _id: objectId(id) } } }
+      );
       res.json({ status: true });
     } catch (error) {
-      res.json({error: error.message})
+      res.json({ error: error.message });
+    }
+  },
+
+  finishCatTodo: async function (req, res) {
+    try {
+     
+      let { todo } = req.body;
+      const re = await catSchema.updateOne(
+        { "todoArr._id": objectId(req.body._id) },
+        {
+          $set: {
+            "todoArr.$.isCompleted": true,
+          },
+        }
+        
+      );
+
+      res.send({ status: true });
+    } catch (error) {
+      res.json({ error: error.message });
     }
   },
 };
