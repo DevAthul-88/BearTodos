@@ -12,7 +12,7 @@ router.route("/get_one/:id").post(todoCtrl.getTodoById);
 
 router.route("/cat").post(catCtrl.createCategory);
 router.route("/getCat").post(catCtrl.sendCat);
-router.route("/get_cat/:id").get(catCtrl.sendCatById);
+router.route("/get_cat/:id").post(catCtrl.sendCatById);
 router.route("/create_cat").post(catCtrl.createCatBasedTodo);
 router.route("/getCatById/:id").post(catCtrl.catTodoById);
 router.route("/edit_cat_todo/:id").put(catCtrl.editCatTodo);

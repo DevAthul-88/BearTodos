@@ -28,8 +28,22 @@ module.exports = {
 
   sendCatById: async (req, res) => {
     try {
-      const re = await catSchema.findOne({ _id: req.params.id });
-      res.json({ cat: re });
+      let todo = null
+      const re = await catSchema.findOne({ _id: req.params.id , id:req.body.userId });
+      console.log(req.body);
+
+      if(req.body.filterData == 'all'){
+        todo = re.todoArr
+      }
+      else if(req.body.filterData == 'unCompleted'){
+        todo = re.todoArr.filter(e => e.isCompleted == false)
+      }
+      else if (req.body.filterData == 'completed') {
+          todo = re.todoArr.filter(e => e.isCompleted == true)
+      }
+      
+
+      res.json({cat:re, todo: todo , id:re._id });
     } catch (error) {
       res.send({ message: error.message });
     }

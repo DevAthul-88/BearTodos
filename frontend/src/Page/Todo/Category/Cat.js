@@ -1,27 +1,41 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import * as timeAgo from "timeago.js";
-import { Heading, Spinner, Flex, Tag, Button } from "@chakra-ui/react";
+import { Heading, Spinner, Flex, Tag, Button, Select } from "@chakra-ui/react";
 import { Link as WLink } from "wouter";
 import TodoCard from "../Todo_card";
 import Card from "../../../Components/Todo/Card";
-
+import { FaArrowAltCircleDown } from "react-icons/fa";
 function Cat({ id }) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
+  const [todo, setTodo] = useState({});
+  const [ids, setId] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [drop, setDrop] = useState("all");
+
+ 
 
   useEffect(() => {
+    let user = JSON.parse(localStorage.getItem("todo_user"));
     axios
-      .get(`/todo/get_cat/${id}`)
+      .post(`/todo/get_cat/${id}`, { filterData: drop, userId: user.id })
       .then((res) => {
+        if(res.data){
         setData(res.data.cat);
-        setLoading(false);
+        setTodo(res.data.todo);
+        setId(res.data.id);
+        setLoading(false)
+        }
       })
       .catch((error) => {
         setData(error);
       });
-  }, []);
+  }, [drop]);
+
+  function onChange(event) {
+    setDrop(event.target.value);
+  }
 
   return (
     <div>
@@ -32,7 +46,7 @@ function Cat({ id }) {
       ) : (
         <div>
           <Flex justifyContent="space-between" marginBottom={"5"}>
-            <Heading colorScheme={data.color}>
+            <Heading>
               {data.title}
               {`(${data.todoArr.length})`}
               <i className={data.icon}></i>
@@ -50,8 +64,25 @@ function Cat({ id }) {
               Create a new todo
             </Button>
           </Flex>
-          {data.todoArr.length > 0 ? (
-            <Card todo={data.todoArr} _id={data._id}/>
+
+          <Flex justifyContent={"right"}>
+            <div>
+              <Select
+                size={"lg"}
+                colorScheme={"green"}
+                icon={<FaArrowAltCircleDown />}
+                onChange={onChange}
+                defaultValue={"all"}
+              >
+                <option value="all">All</option>
+                <option value="unCompleted">UnCompleted</option>
+                <option value="completed">Completed</option>
+              </Select>
+            </div>
+          </Flex>
+
+          {todo.length > 0 ? (
+            <Card todo={todo} _id={ids} />
           ) : (
             <Heading>No todos found</Heading>
           )}

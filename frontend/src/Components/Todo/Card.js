@@ -22,13 +22,12 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Model from "../../Components/Todo/CatModel";
-import { FaPen, FaCheck, FaTrash, FaStar } from "react-icons/fa";
-import { Link as wLink ,useRoute , useLocation} from "wouter";
+import { FaPen, FaCheck, FaTrash, FaStar , FaArrowAltCircleDown } from "react-icons/fa";
+import { Link as wLink, useRoute, useLocation } from "wouter";
 
-function Card({ todo , _id}) {
-
-  const [match , params] = useRoute('/category/:id')
-  const [location , setLocation] = useLocation()
+function Card({ todo, _id }) {
+  const [match, params] = useRoute("/category/:id");
+  const [location, setLocation] = useLocation();
   
 
   function check(val) {
@@ -43,8 +42,11 @@ function Card({ todo , _id}) {
     }
   }
 
-  async function completeTodo(id , ids) {
-    let res = await axios.post("/todo/completeCatTodo", { _id: id , id: params.id});
+  async function completeTodo(id, ids) {
+    let res = await axios.post("/todo/completeCatTodo", {
+      _id: id,
+      id: params.id,
+    });
     if (res.data.status) {
       window.location.reload();
     }
@@ -65,7 +67,11 @@ function Card({ todo , _id}) {
     <div>
       <br />
 
-      <Heading marginBottom={"5"}>All todos</Heading>
+
+        <Heading marginBottom={"5"}>All todos</Heading>
+
+        
+  
 
       {error && (
         <Stack>
@@ -124,7 +130,7 @@ function Card({ todo , _id}) {
 
                       <Tooltip label="Complete Todo" shouldWrapChildren>
                         <IconButton
-                          onClick={() => completeTodo(e._id , _id)}
+                          onClick={() => completeTodo(e._id, _id)}
                           aria-label="finish"
                           icon={<FaCheck />}
                           background={"green.500"}
