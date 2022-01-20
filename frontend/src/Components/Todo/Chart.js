@@ -1,7 +1,7 @@
 
 import React from "react";
 import {Heading} from '@chakra-ui/react'
-import { PieChart, Pie, Legend, Tooltip } from "recharts";
+import {ResponsiveContainer, PieChart, Pie, Legend, Tooltip } from "recharts";
 
 
 
@@ -17,11 +17,12 @@ export default function Chart({data}) {
       ];
 
   return (
-   <React.Fragment>
+   <div style={{ width: '100%', height: 300 }}>
        <Heading marginTop={"5"}>
            Data Via Chart
        </Heading>
-        <PieChart width={1000} height={400}>
+       <ResponsiveContainer>
+       <PieChart >
       <Pie
         dataKey="value"
         isAnimationActive={true}
@@ -35,6 +36,7 @@ export default function Chart({data}) {
       
       <Tooltip />
     </PieChart>
-   </React.Fragment>
+       </ResponsiveContainer>
+   </div>
   );
 }

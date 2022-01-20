@@ -187,17 +187,7 @@ function Card({ todo, _id }) {
               </Tooltip>
             ) : null}
 
-            <Tooltip label="Add to favorites" shouldWrapChildren>
-              <IconButton
-                margin={"2"}
-                size={"xs"}
-                aria-label="add"
-                icon={<FaStar />}
-                background={"yellow.500"}
-                color="yellow.100"
-                _hover={{ background: "red.400" }}
-              />
-            </Tooltip>
+            
 
             {e.description ? (
               <Accordion marginTop={"5"} allowMultiple>

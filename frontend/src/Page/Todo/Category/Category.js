@@ -29,7 +29,7 @@ function Category() {
         <div>
             <Flex justifyContent={"space-between"}>
               <Heading>
-                  Category
+                  Category's
               </Heading>
 
             <Button colorScheme={"blue"} as={WLnk} href={"/create_category"}>
