@@ -29,7 +29,7 @@ function Card({ todo, _id }) {
   const [match, params] = useRoute("/category/:id");
   const [location, setLocation] = useLocation();
   
-
+console.log(todo);
   function check(val) {
     if (val === "extreme") {
       return "red";

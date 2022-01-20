@@ -54,6 +54,7 @@ function Create_cat_todo({id}) {
         priority: values,
         isCompleted: false,
         id: user.id,
+        createdAt:new Date(Date.now()),
       };
 
       await Axios.post("/todo/create_cat", {data:todoObj , id:id});
