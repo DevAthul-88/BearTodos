@@ -6,7 +6,6 @@ import { Route } from "wouter";
 import Explore from "../Todo/Explore";
 import Todos from "../Todo/Todos";
 import Category from "../Todo/Category/Category";
-import Favorites from "../Todo/Favourites";
 import Profile from "./Profile";
 import Create_todo from "../Todo/Create_todo";
 import Create_cat from "./Category/Create_cat";
@@ -27,7 +26,6 @@ function Home() {
         <Route path="/" component={Explore} />
         <Route path="/todos" component={Todos} />
         <Route path="/category" component={Category} />
-        <Route path="/favorites" component={Favorites} />
         <Route path="/profile">
           <Profile />
         </Route>

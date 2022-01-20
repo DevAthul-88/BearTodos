@@ -48,7 +48,6 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, path: "/" },
   { name: "Todos", icon: FaListOl, path: "/todos" },
   { name: "Category", icon: FaStickyNote, path: "/category" },
-  { name: "Favourites", icon: FiStar, path: "/favorites" },
   { name: "Profile", icon: FaUser, path: "/profile" },
 ];
 
