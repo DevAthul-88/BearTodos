@@ -7,6 +7,7 @@ import TodoCard from "../Todo_card";
 import Card from "../../../Components/Todo/Card";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 function Cat({ id }) {
+ 
   const [data, setData] = useState([]);
   const [todo, setTodo] = useState({});
   const [ids, setId] = useState("");

@@ -21,7 +21,7 @@ import {
   import {useLocation} from 'wouter'
 
 function Edit_todo(params) {
-
+  document.title = 'BearTodos - Edit Todo'
  
     const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

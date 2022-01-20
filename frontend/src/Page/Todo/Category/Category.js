@@ -12,6 +12,7 @@ import {
   import { Link as WLnk } from "wouter";
 
 function Category() {
+  document.title = 'BearTodos - Category'
     const [drop , setDrop] = useState('all')
     const [cat, setCat] = useState([]);
     const [catLoading, setCatLoading] = useState(true);

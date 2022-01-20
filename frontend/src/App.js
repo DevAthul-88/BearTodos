@@ -34,8 +34,6 @@ function App() {
     checkAuth();
   }, []);
 
-
-
   return (
     <ChakraProvider>
       <div className="App">

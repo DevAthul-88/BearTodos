@@ -35,6 +35,7 @@ import {
 import {FaListOl , FaStickyNote , FaUser} from 'react-icons/fa'
 import { IconType } from "react-icons";
 import { ReactText } from "react";
+import {Link as WLink} from 'wouter'
 import { Link as RouteLink, useRoute } from "wouter";
 
 let user = "";
@@ -246,7 +247,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem>Profile</MenuItem>
+              <MenuItem as={WLink} href='/profile'>Profile</MenuItem>
              
               <MenuDivider />
               <MenuItem onClick={handleSignOut}>Sign out</MenuItem>

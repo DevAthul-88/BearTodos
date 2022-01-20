@@ -14,6 +14,7 @@ import Todo_Card from "../Todo/Todo_card";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 
 function Todos() {
+  document.title = 'BearTodos - Todos'
   const [todo, setTodo] = useState([]);
   const [drop , setDrop] = useState('all')
   const [cat, setCat] = useState([]);

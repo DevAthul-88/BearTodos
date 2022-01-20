@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 
 function Create_todo() {
+  document.title = 'BearTodos - Create Todo'
   const [loading, setLoading] = useState(false);
   const [values, setValue] = useState("high");
   const [error, setError] = useState(null);

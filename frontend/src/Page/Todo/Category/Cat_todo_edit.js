@@ -21,6 +21,7 @@ import {
 import { useLocation } from "wouter";
 
 function Edit_todo(params) {
+  document.title = 'BearTodos - Edit Todo'
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [spinners, setSpinner] = useState(true);
@@ -59,6 +60,7 @@ function Edit_todo(params) {
   }
 
   async function Submit(e) {
+    
     e.preventDefault();
     setLoading(true);
 

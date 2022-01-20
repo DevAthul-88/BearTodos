@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 function Create_cat() {
+  document.title = 'BearTodos - Create Category'
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useLocation();
   const [error, setError] = useState(null);
