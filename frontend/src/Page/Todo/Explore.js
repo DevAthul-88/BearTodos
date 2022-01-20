@@ -1,5 +1,6 @@
 import React, { useEffect,  useState } from "react";
 import axios from 'axios'
+import Chart from '../../Components/Todo/Chart'
 import { Button, ButtonGroup, Spacer } from "@chakra-ui/react";
 import {
   Flex,
@@ -59,7 +60,8 @@ document.title = 'BearTodos - Explore'
                loading ? (<Flex justifyContent="center">
                  <Spinner size='xl'/>
                </Flex>) : (
-                <Flex
+               <div>
+                  <Flex
                 marginTop={"10"}
                 justifyContent={"space-between"}
                 className="flex-explore"
@@ -127,6 +129,8 @@ document.title = 'BearTodos - Explore'
         
               
               </Flex>
+              <Chart data={total}/>
+               </div>
                )
        }
     </div>
