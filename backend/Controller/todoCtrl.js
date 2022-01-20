@@ -39,7 +39,6 @@ module.exports = {
   },
 
   deleteTodo: async (req, res) => {
-
     try {
       let re = await todoModel.deleteOne({ _id: req.body.id });
 
@@ -73,4 +72,17 @@ module.exports = {
       res.json({ error: error });
     }
   },
+
+  totalCount: async (req, res) => {
+    try {
+      const {id} = req.params
+
+    const re = await todoModel.find({id:id}).count()
+    const reFinish = await todoModel.find({id:id , isCompleted: true}).count()
+    const unFinish = await todoModel.find({id:id , isCompleted: false}).count()
+    res.json({total:re , finished:reFinish , unFinish: unFinish})
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 };

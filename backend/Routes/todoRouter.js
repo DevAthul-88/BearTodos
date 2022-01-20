@@ -3,13 +3,9 @@ const todoCtrl = require("../Controller/todoCtrl");
 const catCtrl = require("../Controller/catCtrl");
 
 router.route("/").post(todoCtrl.createTodo).patch(todoCtrl.editTodo);
-
 router.route("/delete").post(todoCtrl.deleteTodo);
-
 router.route("/get").post(todoCtrl.getTodoList);
-
 router.route("/get_one/:id").post(todoCtrl.getTodoById);
-
 router.route("/cat").post(catCtrl.createCategory);
 router.route("/getCat").post(catCtrl.sendCat);
 router.route("/get_cat/:id").post(catCtrl.sendCatById);
@@ -20,5 +16,6 @@ router.route("/edit_todo_category/:id").post(catCtrl.catTodoById);
 router.route("/completeTodo").post(todoCtrl.completeTodo);
 router.route("/deleteTodo/:id").post(catCtrl.deleteCatTodo);
 router.route("/completeCatTodo").post(catCtrl.finishCatTodo);
+router.route("/totalCount/:id").get(todoCtrl.totalCount);
 
 module.exports = router;
