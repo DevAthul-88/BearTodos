@@ -19,7 +19,10 @@ function App() {
         });
 
         setAuth(res.data.valid);
-        if (res.data.valid === false) return localStorage.clear();
+        if (res.data.valid === false){
+          window.location.href = '/login';
+          return localStorage.clear()
+        };
 
         let user = JSON.parse(localStorage.getItem("todo_user"));
         if (user === undefined) return localStorage.clear();
@@ -29,6 +32,7 @@ function App() {
         }
       } else {
         setAuth(false);
+        localStorage.clear()
       }
     }
     checkAuth();

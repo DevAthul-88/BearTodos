@@ -34,7 +34,7 @@ module.exports = {
         lastName: user.lastName,
         id: user._id,
         email: user.email,
-        created:user.CreatedDate
+        created: user.CreatedDate,
       };
 
       res.send({ token: token, status: true, user: setUser });
@@ -71,35 +71,33 @@ module.exports = {
     try {
       const token = req.header("Authorization");
 
-      if (!token) return res.status(400).send({ valid: false });
+      if (!token) return res.send({ valid: false });
 
       const verifyToken = jwt.verify(
         token,
         process.env.TOKEN,
         async (err, data) => {
-          if (err) return res.status(500).send({ valid: false });
+          if (err) return res.send({ valid: false });
 
           const user = await User.findById(data.id);
 
-          if (!user) return res.status(400).send({ valid: false });
+          if (!user) return res.send({ valid: false });
 
           const setUser = {
             firstName: user.firstName,
             lastName: user.lastName,
             id: user._id,
             email: user.email,
-            created:user.CreatedDate
+            created: user.CreatedDate,
           };
 
           res.send({ valid: true, user: setUser });
         }
       );
     } catch (error) {
-      res.status(500).send({ message: error.message });
+      res.send({ message: error.message });
     }
   },
-
- 
 
   deleteUser: () => {},
 };
