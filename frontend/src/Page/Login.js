@@ -44,29 +44,25 @@ export default function Login({ isAuth, setUserLocal }) {
     e.preventDefault();
 
     try {
-
       const data = {
-        email:user.email,
-        password:user.password
-      }
-
+        email: user.email,
+        password: user.password,
+      };
 
       const res = await axios.post("/user/login", data);
 
-     if(res.data.status !== false) {
-  
-      localStorage.setItem("todo_token", res.data.token);
-      localStorage.setItem("todo_user", JSON.stringify(res.data.user));
-      setUserLocal(res.data.user);
-      isAuth(res.data.status);
-      window.location.href = '/'
-     }
+      if (res.data.status !== false) {
+        localStorage.setItem("todo_token", res.data.token);
+        localStorage.setItem("todo_user", JSON.stringify(res.data.user));
+        setUserLocal(res.data.user);
+        isAuth(res.data.status);
+        window.location.href = "/";
+      }
 
       setError(res.data.message);
     } catch (error) {
       setError(error.message);
     }
-    
   }
 
   return (

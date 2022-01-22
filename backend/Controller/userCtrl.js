@@ -61,9 +61,9 @@ module.exports = {
       });
 
       user.save();
-      res.status(200).send({ loggedIn: true });
+      res.send({ created: true });
     } catch (error) {
-      res.status(500).send({ message: error.message });
+      res.send({ message: error.message });
     }
   },
 
