@@ -83,7 +83,7 @@ function Cat({ id }) {
           </Flex>
 
           {todo.length > 0 ? (
-            <Card todo={todo} _id={ids} />
+            <Card todo={todo} _id={ids} drop={drop}/>
           ) : (
             <Heading>No todos found</Heading>
           )}

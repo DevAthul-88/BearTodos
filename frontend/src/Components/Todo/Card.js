@@ -22,14 +22,20 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Model from "../../Components/Todo/CatModel";
-import { FaPen, FaCheck, FaTrash, FaStar , FaArrowAltCircleDown } from "react-icons/fa";
+import {
+  FaPen,
+  FaCheck,
+  FaTrash,
+  FaStar,
+  FaArrowAltCircleDown,
+} from "react-icons/fa";
 import { Link as wLink, useRoute, useLocation } from "wouter";
 
-function Card({ todo, _id }) {
+function Card({ todo, _id, drop }) {
   const [match, params] = useRoute("/category/:id");
   const [location, setLocation] = useLocation();
-  
-console.log(todo);
+
+  console.log(todo);
   function check(val) {
     if (val === "extreme") {
       return "red";
@@ -67,11 +73,7 @@ console.log(todo);
     <div>
       <br />
 
-
-        <Heading marginBottom={"5"}>All todos</Heading>
-
-        
-  
+      <Heading marginBottom={"5"} textTransform={"capitalize"}>{drop} todos</Heading>
 
       {error && (
         <Stack>
@@ -186,8 +188,6 @@ console.log(todo);
                 </Tag>
               </Tooltip>
             ) : null}
-
-            
 
             {e.description ? (
               <Accordion marginTop={"5"} allowMultiple>
