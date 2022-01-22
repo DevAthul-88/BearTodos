@@ -73,7 +73,9 @@ function Card({ todo, _id, drop }) {
     <div>
       <br />
 
-      <Heading marginBottom={"5"} textTransform={"capitalize"}>{drop} todos</Heading>
+      <Heading marginBottom={"5"} textTransform={"capitalize"}>
+        {drop} todos
+      </Heading>
 
       {error && (
         <Stack>

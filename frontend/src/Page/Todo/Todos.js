@@ -14,9 +14,9 @@ import Todo_Card from "../Todo/Todo_card";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 
 function Todos() {
-  document.title = 'BearTodos - Todos'
+  document.title = "BearTodos - Todos";
   const [todo, setTodo] = useState([]);
-  const [drop , setDrop] = useState('all')
+  const [drop, setDrop] = useState("all");
   const [cat, setCat] = useState([]);
   const [catLoading, setCatLoading] = useState(true);
   const [todoLoading, setTodoLoading] = useState(false);
@@ -29,14 +29,13 @@ function Todos() {
       setCatLoading(false);
     });
 
-    Axios.post("/todo/get", { id: user.id , value:drop}).then((e) => {
+    Axios.post("/todo/get", { id: user.id, value: drop }).then((e) => {
       setTodo(e.data.todo);
     });
   }, [drop]);
 
-
   function onChange(event) {
-    setDrop(event.target.value)
+    setDrop(event.target.value);
   }
 
   return (
@@ -48,7 +47,7 @@ function Todos() {
             colorScheme={"green"}
             icon={<FaArrowAltCircleDown />}
             onChange={onChange}
-            defaultValue={'all'}
+            defaultValue={"all"}
           >
             <option value="all">All</option>
             <option value="unCompleted">UnCompleted</option>
@@ -61,17 +60,15 @@ function Todos() {
             <Button colorScheme="green" as={WLnk} to="/create_todo">
               Create todo
             </Button>
-
-          
           </ButtonGroup>
         </div>
       </Flex>
 
-      
-
       <div>
         {todo.length < 1 ? (
-          <Heading marginTop={"5"} fontSize={'lg'}>No Todos Found</Heading>
+          <Heading marginTop={"5"} size={"lg"}>
+            No Todos Found
+          </Heading>
         ) : (
           <Todo_Card todo={todo} />
         )}

@@ -40,6 +40,7 @@ function Home() {
             </Heading>
 
             <Heading
+            
               size="md"
               width={"3xl"}
               fontSize="25px"

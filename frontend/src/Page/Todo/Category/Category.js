@@ -36,11 +36,13 @@ function Category() {
             <Button colorScheme={"blue"} as={WLnk} href={"/create_category"}>
               Create category
             </Button>
+
+            
             </Flex>
 
 
             <Flex marginTop={"10"}>
-        {cat.length < 1 ? null : (
+        {cat.length < 1 ? <Heading size={"lg"}>No Category Found</Heading> : (
           <div>
             {catLoading ? (
               <Spinner />

@@ -15,6 +15,19 @@ module.exports = {
     }
   },
 
+  deleteCategory: async (req , res) => {
+     try {
+       let {id} = req.params
+       let {userId} = req.body
+       console.log(userId);
+       let re = await catSchema.deleteOne({_id:objectId(id) , id:userId})
+       res.json({ status: true });
+
+     } catch (error) {
+       return res.json({ message: error.message });
+     }
+  },
+
   sendCat: async (req, res) => {
     try {
       let userId = req.body.id;

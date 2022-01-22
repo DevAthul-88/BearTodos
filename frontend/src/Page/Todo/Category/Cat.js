@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import * as timeAgo from "timeago.js";
-import { Heading, Spinner, Flex, Tag, Button, Select } from "@chakra-ui/react";
+import { Heading, Spinner, Flex, Tag, Button, Select, Menu ,MenuButton , MenuItem , MenuList } from "@chakra-ui/react";
 import { Link as WLink } from "wouter";
 import TodoCard from "../Todo_card";
+import Model from '../../../Components/Todo/DeleteCatModel'
 import Card from "../../../Components/Todo/Card";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 function Cat({ id }) {
@@ -14,7 +15,7 @@ function Cat({ id }) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [drop, setDrop] = useState("all");
-
+  const [mode, showModel] = useState(false);
  
 
   useEffect(() => {
@@ -38,6 +39,10 @@ function Cat({ id }) {
     setDrop(event.target.value);
   }
 
+  function showModels(){
+        showModel(true)
+  }
+
   return (
     <div>
       {loading ? (
@@ -57,13 +62,19 @@ function Cat({ id }) {
               {timeAgo.format(data.createdAt)}
             </Tag>
 
-            <Button
-              colorScheme={"green"}
-              as={WLink}
-              href={`/create_todo_category/${id}`}
-            >
-              Create a new todo
-            </Button>
+           
+
+            <Menu >
+  <MenuButton as={Button} rightIcon={<FaArrowAltCircleDown/>} colorScheme={'green'}>
+    Options
+  </MenuButton>
+  <MenuList>
+    <MenuItem color={'green.500'} background={'green.100'} as={WLink} href={`/create_todo_category/${id}`}>Create Todo</MenuItem>
+    <MenuItem background={'red.100'}  color={'red.500'} as='button' onClick={showModels}>Delete Category</MenuItem>
+  
+  </MenuList>
+</Menu>
+
           </Flex>
 
           <Flex justifyContent={"right"}>
@@ -89,6 +100,7 @@ function Cat({ id }) {
           )}
         </div>
       )}
+          <Model id={id} isOpen={mode} isClose={showModel} />
     </div>
   );
 }
