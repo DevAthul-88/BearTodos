@@ -22,12 +22,14 @@ import {
 import { Link } from "wouter";
 
 export default function Login({ isAuth, setUserLocal }) {
+  document.title = 'BearTodos - Login'
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -42,7 +44,7 @@ export default function Login({ isAuth, setUserLocal }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const data = {
         email: user.email,
@@ -60,6 +62,9 @@ export default function Login({ isAuth, setUserLocal }) {
       }
 
       setError(res.data.message);
+      if (res.data.message) {
+        setLoading(false);
+      }
     } catch (error) {
       setError(error.message);
     }
@@ -133,6 +138,7 @@ export default function Login({ isAuth, setUserLocal }) {
                     _hover={{
                       bg: "green.600",
                     }}
+                    isLoading={loading}
                   >
                     Sign in
                   </Button>

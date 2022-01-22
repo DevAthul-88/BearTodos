@@ -25,9 +25,11 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link } from "wouter";
 
 export default function Register() {
+  document.title = 'BearTodos - Register'
   const [location, setLocation] = useLocation();
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading , setLoading]  = useState(false)
   const [credentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
@@ -46,15 +48,24 @@ export default function Register() {
     });
   }
 
+  
+
   async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
     try {
-      e.preventDefault();
+    
       const re = await axios.post("/user", credentials);
       if (re.data.created) {
         setLocation("/login");
       }
+      setError(re.data.message);
+      if(re.data.message){
+        setLoading(false)
+      }
     } catch (error) {
       setError(error.message)
+      
     }
   }
 
@@ -160,13 +171,13 @@ export default function Register() {
               <Stack spacing={10} pt={2}>
                 <Button
                   type="submit"
-                  loadingText="Submitting"
                   size="lg"
                   bg={"green.400"}
                   color={"white"}
                   _hover={{
                     bg: "green.500",
                   }}
+                  isLoading={loading}
                 >
                   Sign up
                 </Button>

@@ -10,6 +10,7 @@ Text
 import {Link} from 'wouter'
 
 function Home() {
+  document.title = 'BearTodos'
     return (
         <div>
             <Container maxW='container.xl' marginTop={'32'}>
