@@ -70,7 +70,7 @@ function Todos() {
             No Todos Found
           </Heading>
         ) : (
-          <Todo_Card todo={todo} />
+          <Todo_Card todo={todo} drop={drop}/>
         )}
       </div>
     </div>

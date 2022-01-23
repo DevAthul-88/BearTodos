@@ -30,3 +30,6 @@ code {
 .cat_box{
   border: 2px solid rgb(68, 66, 66);
 }
+.active{
+  background: red;
+}

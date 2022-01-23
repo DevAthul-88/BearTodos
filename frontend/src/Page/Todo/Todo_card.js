@@ -25,7 +25,7 @@ import Model from "../../Components/Todo/Modal";
 import { FaPen, FaCheck, FaTrash, FaStar } from "react-icons/fa";
 import { Link as wLink , useLocation } from "wouter";
 
-function Todo_card({ todo }) {
+function Todo_card({ todo , drop}) {
 
 
   const [location, setLocation] = useLocation();
@@ -64,7 +64,7 @@ function Todo_card({ todo }) {
     <div>
       <br />
 
-      <Heading marginBottom={"5"} fontSize={'lg'}>UnCategorized Todos</Heading>
+      <Heading marginBottom={"5"} textTransform={"capitalize"}>{drop} Todos</Heading>
 
       {error && (
         <Stack>

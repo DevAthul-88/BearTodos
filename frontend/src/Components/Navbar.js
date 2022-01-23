@@ -32,10 +32,10 @@ import {
   FiBell,
   FiChevronDown,
 } from "react-icons/fi";
-import {FaListOl , FaStickyNote , FaUser} from 'react-icons/fa'
+import { FaListOl, FaStickyNote, FaUser } from "react-icons/fa";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
-import {Link as WLink} from 'wouter'
+import { Link as WLink } from "wouter";
 import { Link as RouteLink, useRoute } from "wouter";
 
 let user = "";
@@ -52,8 +52,9 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Profile", icon: FaUser, path: "/profile" },
 ];
 
-export default function SidebarWithHeader({
+export default function SidebarWithHeader(props,{
   children,
+
 }: {
   children: ReactNode,
 }) {
@@ -71,6 +72,7 @@ export default function SidebarWithHeader({
         left={0}
         right={0}
         display={{ base: "none", md: "block" }}
+        
       />
       <Drawer
         autoFocus={false}
@@ -81,13 +83,13 @@ export default function SidebarWithHeader({
         onOverlayClick={onClose}
         size="full"
       >
-        <DrawerContent>
+        <DrawerContent >
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }} p="4" >
         {children}
       </Box>
     </Box>
@@ -247,8 +249,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem as={WLink} href='/profile'>Profile</MenuItem>
-             
+              <MenuItem as={WLink} href="/profile">
+                Profile
+              </MenuItem>
+
               <MenuDivider />
               <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
             </MenuList>
