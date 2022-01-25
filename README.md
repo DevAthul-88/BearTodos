@@ -5,6 +5,13 @@ A simple and easy to use todo app. Built using MERN Stack
 <img src='https://i.postimg.cc/C1vGJ4XY/Screenshot.png' alt='home-page' >
 <img src="https://i.postimg.cc/Fz3yyJtV/Screenshot-1.png" alt="todo-page">
 
+## Features
+
+* Login and Registration system.
+* Create , Edit , Update , Delete todos.
+* Create category's
+* Seperate todos based on category's
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
