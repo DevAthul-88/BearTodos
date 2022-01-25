@@ -21,8 +21,16 @@ A step by step series of examples that tell you how to get a development env run
 
 Say what the step will be
 
-#clone this repo
+
 ```
+# Clone this repo
+git clone git@github.com:DevAthul-88/Todo-App.git
+
+# Go to file
+cd BearTodos
+
+# Install dependencies
+npm install
 
 ```
 
