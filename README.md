@@ -21,8 +21,9 @@ A step by step series of examples that tell you how to get a development env run
 
 Say what the step will be
 
+#clone this repo
 ```
-Give the example
+
 ```
 
 And repeat
@@ -30,6 +31,11 @@ And repeat
 ```
 until finished
 ```
+## Add the following enviroments in .ENV
+
+* DATABASE_URL (to use your MongoDB connection string)
+* JWT Token
+
 
 ## Deployment
 
