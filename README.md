@@ -2,7 +2,8 @@
 
 A simple and easy to use todo app. Built using MERN Stack
 
-<img src='https://i.postimg.cc/C1vGJ4XY/Screenshot.png' alt='home-page' />
+<img src='https://i.postimg.cc/C1vGJ4XY/Screenshot.png' alt='home-page' >
+<img src="https://i.postimg.cc/Fz3yyJtV/Screenshot-1.png" alt="todo-page">
 
 ## Getting Started
 
