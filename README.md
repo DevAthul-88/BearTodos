@@ -22,23 +22,26 @@ A step by step series of examples that tell you how to get a development env run
 Say what the step will be
 
 
-```
-# Clone this repo
-git clone git@github.com:DevAthul-88/Todo-App.git
+    <!-- Clone this repository -->
+    git clone https://github.com/salihozdemir/stackoverflow-clone
+    
+    <!--  Go into the repository -->
+    cd BearTodos
+    
+    <!-- Install dependencies -->
+    cd backend --npm install
+    cd frontend --npm install
+    
+    <!-- Go into backend -->
+    cd backend
+    
+    <!-- Start server -->
+    npm run start OR npm start
+    
+    <!-- Run frontend -->
+    cd frontend --npm start
 
-# Go to file
-cd BearTodos
 
-# Install dependencies
-npm install
-
-```
-
-And repeat
-
-```
-until finished
-```
 ## Add the following enviroments in .ENV
 
 * DATABASE_URL (to use your MongoDB connection string)
